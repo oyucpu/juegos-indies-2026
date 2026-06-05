@@ -1,0 +1,1359 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>☠️ ¿Qué juego indie te espera este verano?</title>
+  <link href="https://fonts.googleapis.com/css2?family=Creepster&family=Special+Elite&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:        #0a090c;
+      --bg2:       #110f15;
+      --bg3:       #1a1720;
+      --bg4:       #221e2a;
+      --text:      #e8e0d0;
+      --text2:     #8a7e9a;
+      --text3:     #5a4f6a;
+      --border:    rgba(180,140,220,0.12);
+      --border2:   rgba(180,140,220,0.25);
+      --red:       #c0392b;
+      --red-glow:  rgba(192,57,43,0.35);
+      --red-dim:   #7a1a10;
+      --red-light: #e85a4a;
+      --purple:    #7c3aed;
+      --purple-glow: rgba(124,58,237,0.3);
+      --purple-light: #a78bfa;
+      --purple-dim:  #3b1d7a;
+      --green:     #15803d;
+      --green-light: #4ade80;
+      --amber:     #b45309;
+      --amber-light: #fbbf24;
+      --moon:      #d4c5a9;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      font-family: 'DM Sans', sans-serif;
+      min-height: 100vh;
+      color: var(--text);
+      overflow-x: hidden;
+      cursor: default;
+    }
+
+    /* ── Atmospheric background ── */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background:
+        radial-gradient(ellipse 60% 50% at 15% 0%,   rgba(124,58,237,0.08) 0%, transparent 60%),
+        radial-gradient(ellipse 40% 60% at 85% 100%,  rgba(192,57,43,0.07) 0%, transparent 60%),
+        radial-gradient(ellipse 30% 40% at 50% 50%,   rgba(15,10,25,0.9) 0%, transparent 100%);
+      z-index: 0;
+    }
+
+    /* ── Scanlines texture ── */
+    body::after {
+      content: '';
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background: repeating-linear-gradient(
+        0deg,
+        transparent,
+        transparent 2px,
+        rgba(0,0,0,0.03) 2px,
+        rgba(0,0,0,0.03) 4px
+      );
+      z-index: 0;
+    }
+
+    .wrap {
+      position: relative;
+      z-index: 1;
+      padding: 2rem 1.25rem 4rem;
+      max-width: 700px;
+      margin: 0 auto;
+    }
+
+    /* ── Header ── */
+    .header {
+      text-align: center;
+      padding: 2.5rem 1rem 2rem;
+      position: relative;
+    }
+
+    .skull-row {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 0.5rem;
+      margin-bottom: 1rem;
+    }
+    .skull-row span { font-size: 22px; animation: floatBob 3s ease-in-out infinite; }
+    .skull-row span:nth-child(2) { animation-delay: 0.5s; font-size: 32px; }
+    .skull-row span:nth-child(3) { animation-delay: 1s; }
+
+    @keyframes floatBob {
+      0%, 100% { transform: translateY(0); }
+      50%       { transform: translateY(-6px); }
+    }
+
+    .site-title {
+      font-family: 'Creepster', cursive;
+      font-size: clamp(28px, 7vw, 46px);
+      color: var(--red-light);
+      letter-spacing: 2px;
+      line-height: 1.1;
+      text-shadow: 0 0 30px var(--red-glow), 0 0 60px rgba(192,57,43,0.15);
+      margin-bottom: 0.6rem;
+    }
+
+    .site-sub {
+      font-family: 'Special Elite', cursive;
+      font-size: 13px;
+      color: var(--text2);
+      letter-spacing: 1px;
+      line-height: 1.6;
+    }
+
+    /* ── Divider with bats ── */
+    .bat-divider {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin: 1.5rem 0;
+      color: var(--text3);
+      font-size: 18px;
+    }
+    .bat-divider::before, .bat-divider::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--border2), transparent);
+    }
+
+    /* ── Progress bar ── */
+    .prog-wrap {
+      height: 6px;
+      background: var(--bg3);
+      border-radius: 999px;
+      margin-bottom: 1.75rem;
+      overflow: hidden;
+      border: 1px solid var(--border);
+    }
+    .prog-bar {
+      height: 100%;
+      background: linear-gradient(90deg, var(--red-dim), var(--red-light));
+      border-radius: 999px;
+      transition: width 0.45s cubic-bezier(0.4, 0, 0.2, 1);
+      box-shadow: 0 0 8px var(--red-glow);
+    }
+
+    /* ── Question card ── */
+    .qcard {
+      background: var(--bg2);
+      border: 1px solid var(--border2);
+      border-radius: 4px;
+      padding: 2rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .qcard::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, var(--red-light), transparent);
+      opacity: 0.6;
+    }
+
+    .qcard::after {
+      content: '✦';
+      position: absolute;
+      top: 10px; right: 14px;
+      color: var(--red-dim);
+      font-size: 14px;
+      opacity: 0.5;
+    }
+
+    .qlabel {
+      font-family: 'Special Elite', cursive;
+      font-size: 11px;
+      color: var(--text3);
+      margin-bottom: 12px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+
+    .qtext {
+      font-family: 'Special Elite', cursive;
+      font-size: clamp(16px, 4vw, 20px);
+      color: var(--text);
+      margin-bottom: 1.6rem;
+      line-height: 1.4;
+    }
+
+    /* ── Options ── */
+    .opts {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .opt {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px 16px;
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      background: var(--bg3);
+      cursor: pointer;
+      font-size: 14px;
+      color: var(--text2);
+      text-align: left;
+      font-family: 'DM Sans', sans-serif;
+      transition: all 0.18s ease;
+      position: relative;
+    }
+    .opt:hover {
+      border-color: var(--purple-light);
+      color: var(--text);
+      background: var(--bg4);
+    }
+    .opt.sel {
+      background: rgba(124,58,237,0.12);
+      border-color: var(--purple);
+      color: var(--purple-light);
+      box-shadow: 0 0 12px var(--purple-glow), inset 0 0 8px rgba(124,58,237,0.08);
+    }
+    .opt.sel-horror {
+      background: rgba(192,57,43,0.12);
+      border-color: var(--red);
+      color: var(--red-light);
+      box-shadow: 0 0 12px var(--red-glow), inset 0 0 8px rgba(192,57,43,0.08);
+    }
+
+    .opt-l {
+      width: 24px; height: 24px;
+      border-radius: 2px;
+      border: 1px solid var(--border2);
+      background: var(--bg);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 10px;
+      font-weight: 700;
+      font-family: 'Creepster', cursive;
+      color: var(--text3);
+      transition: all 0.18s;
+      flex-shrink: 0;
+    }
+    .opt.sel     .opt-l { background: var(--purple); border-color: var(--purple); color: white; }
+    .opt.sel-horror .opt-l { background: var(--red); border-color: var(--red); color: white; }
+
+    /* ── Dynamic Tags Container in Options ── */
+    .opt-tags {
+      display: flex;
+      gap: 5px;
+      margin-left: auto;
+      flex-wrap: wrap;
+    }
+
+    .gbadge {
+      font-size: 10px; padding: 2px 7px;
+      border-radius: 2px; font-weight: 600;
+      font-family: 'Special Elite', cursive;
+      letter-spacing: 0.3px;
+      white-space: nowrap;
+    }
+    .gbadge-horror { background: rgba(192,57,43,0.2); color: var(--red-light); border: 1px solid rgba(192,57,43,0.3); }
+    .gbadge-summer { background: rgba(180,83,9,0.2);  color: var(--amber-light); border: 1px solid rgba(180,83,9,0.3); }
+    .gbadge-cozy   { background: rgba(21,128,61,0.2); color: var(--green-light); border: 1px solid rgba(21,128,61,0.3); }
+
+    /* ── Nav ── */
+    .nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 1.5rem;
+    }
+    .qcount {
+      font-family: 'Creepster', cursive;
+      font-size: 18px;
+      color: var(--text3);
+      letter-spacing: 1px;
+    }
+
+    .nbtn {
+      padding: 9px 18px;
+      border: 1px solid var(--border2);
+      border-radius: 3px;
+      background: var(--bg3);
+      cursor: pointer;
+      font-size: 13px;
+      color: var(--text2);
+      font-family: 'Special Elite', cursive;
+      letter-spacing: 0.5px;
+      transition: all 0.2s;
+    }
+    .nbtn:hover:not(:disabled) { border-color: var(--purple-light); color: var(--text); background: var(--bg4); }
+    .nbtn.primary {
+      background: var(--red-dim);
+      border-color: var(--red);
+      color: var(--red-light);
+      box-shadow: 0 0 10px var(--red-glow);
+    }
+    .nbtn.primary:hover:not(:disabled) { background: var(--red); color: white; }
+    .nbtn:disabled { opacity: 0.3; cursor: not-allowed; }
+
+    /* ── Results ── */
+    .results { display: none; }
+
+    .res-header {
+      text-align: center;
+      padding: 2rem;
+      border: 1px solid var(--border2);
+      background: var(--bg2);
+      border-radius: 4px;
+      margin-bottom: 1.5rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .res-header::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, var(--purple-light), transparent);
+    }
+    .res-header h2 {
+      font-family: 'Creepster', cursive;
+      font-size: clamp(22px, 5vw, 32px);
+      color: var(--purple-light);
+      letter-spacing: 2px;
+      text-shadow: 0 0 20px var(--purple-glow);
+      margin-bottom: 8px;
+    }
+    .res-header p {
+      font-family: 'Special Elite', cursive;
+      color: var(--text2);
+      font-size: 13px;
+      letter-spacing: 0.5px;
+      line-height: 1.6;
+    }
+
+    .res-filters {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 1.25rem;
+      flex-wrap: wrap;
+    }
+    .filter-btn {
+      padding: 5px 12px;
+      border-radius: 2px;
+      font-size: 11px;
+      font-weight: 600;
+      cursor: pointer;
+      border: 1px solid var(--border2);
+      background: var(--bg3);
+      color: var(--text3);
+      font-family: 'Special Elite', cursive;
+      letter-spacing: 0.5px;
+      transition: all 0.2s;
+    }
+    .filter-btn:hover    { border-color: var(--purple-light); color: var(--text2); }
+    .filter-btn.active   { background: var(--purple-dim); border-color: var(--purple); color: var(--purple-light); box-shadow: 0 0 8px var(--purple-glow); }
+    .filter-btn.f-horror { background: rgba(192,57,43,0.15); border-color: var(--red); color: var(--red-light); box-shadow: 0 0 8px var(--red-glow); }
+    .filter-btn.f-summer { background: rgba(180,83,9,0.15); border-color: var(--amber); color: var(--amber-light); }
+    .filter-btn.f-cozy   { background: rgba(21,128,61,0.15); border-color: var(--green); color: var(--green-light); }
+
+    /* ── Game cards ── */
+    .gcard {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: 3px;
+      padding: 1rem 1.2rem;
+      margin-bottom: 8px;
+      transition: all 0.2s;
+      animation: riseUp 0.4s ease both;
+      position: relative;
+      overflow: hidden;
+    }
+    .gcard::before {
+      content: '';
+      position: absolute;
+      left: 0; top: 0; bottom: 0;
+      width: 2px;
+      background: var(--border2);
+      transition: background 0.2s;
+    }
+    .gcard:hover { border-color: var(--border2); background: var(--bg3); }
+    .gcard:hover::before { background: var(--purple); box-shadow: 0 0 8px var(--purple-glow); }
+    .gcard.horror-card::before { background: var(--red-dim); }
+    .gcard.horror-card:hover::before { background: var(--red-light); box-shadow: 0 0 8px var(--red-glow); }
+
+    @keyframes riseUp {
+      from { opacity: 0; transform: translateY(12px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .grank {
+      font-family: 'Creepster', cursive;
+      font-size: 24px;
+      min-width: 36px;
+      text-align: center;
+      color: var(--text3);
+    }
+    .grank-1 { color: var(--amber-light); text-shadow: 0 0 12px rgba(251,191,36,0.4); }
+    .grank-2 { color: #c0c0c0; }
+    .grank-3 { color: #c4843a; }
+
+    .ginfo { flex: 1; }
+    .gtitle { font-size: 15px; font-weight: 600; color: var(--text); font-family: 'Special Elite', cursive; letter-spacing: 0.3px; }
+    .gmeta  { display: flex; align-items: center; gap: 6px; margin-top: 5px; flex-wrap: wrap; }
+    .gscore { font-size: 11px; color: var(--text3); }
+
+    .gbar-wrap { width: 70px; background: var(--bg3); height: 4px; border-radius: 2px; overflow: hidden; flex-shrink: 0; }
+    .gbar      { height: 100%; border-radius: 2px; transition: width 0.8s ease; }
+    .gbar-normal { background: linear-gradient(90deg, var(--purple-dim), var(--purple-light)); }
+    .gbar-horror { background: linear-gradient(90deg, var(--red-dim), var(--red-light)); }
+
+    /* ── Actions ── */
+    .actions {
+      display: flex;
+      gap: 10px;
+      margin-top: 2rem;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    .btn-action {
+      padding: 10px 22px;
+      border-radius: 3px;
+      font-size: 13px;
+      cursor: pointer;
+      font-family: 'Special Elite', cursive;
+      letter-spacing: 0.5px;
+      transition: all 0.2s;
+    }
+    .btn-reroll {
+      background: var(--red-dim);
+      border: 1px solid var(--red);
+      color: var(--red-light);
+      box-shadow: 0 0 10px var(--red-glow);
+    }
+    .btn-reroll:hover { background: var(--red); color: white; }
+    .btn-restart {
+      background: var(--bg3);
+      border: 1px solid var(--border2);
+      color: var(--text2);
+    }
+    .btn-restart:hover { border-color: var(--purple-light); color: var(--text); }
+
+    .candle-row {
+      display: flex;
+      justify-content: center;
+      gap: 18px;
+      margin: 1.2rem 0 0.5rem;
+    }
+    .candle { font-size: 20px; animation: flicker 4s ease-in-out infinite; }
+    .candle:nth-child(2) { animation-delay: 1.2s; animation-duration: 3.5s; }
+    .candle:nth-child(3) { animation-delay: 2.1s; animation-duration: 5s; }
+
+    @keyframes flicker {
+      0%, 95%, 100% { opacity: 1; }
+      96%            { opacity: 0.4; }
+      97%            { opacity: 1; }
+      98%            { opacity: 0.6; }
+      99%            { opacity: 1; }
+    }
+
+    .spider-wrap { position: relative; }
+    .web-svg {
+      position: absolute;
+      width: 80px; height: 80px;
+      opacity: 0.12;
+      pointer-events: none;
+    }
+    .web-tl { top: 0; left: 0; }
+    .web-tr { top: 0; right: 0; transform: scaleX(-1); }
+
+    .footer {
+      text-align: center;
+      margin-top: 3rem;
+      font-family: 'Special Elite', cursive;
+      font-size: 11px;
+      color: var(--text3);
+      letter-spacing: 1px;
+    }
+    
+    .filter-btn.f-strategy { background: rgba(167,139,250,0.15); border-color: var(--purple-light); color: var(--purple-light); }
+	.filter-btn.f-rpg { background: rgba(251,191,36,0.15); border-color: var(--amber); color: var(--amber-light); }
+	.filter-btn.f-cyberpunk { background: rgba(6,182,212,0.15); border-color: #06b6d4; color: #67e8f9; }
+	
+	/* Nuevos estilos de diseño para los botones de filtros activos */
+	.filter-btn.f-strategy  { background: rgba(124,58,237,0.15); border-color: var(--purple); color: var(--purple-light); box-shadow: 0 0 8px var(--purple-glow); }
+	.filter-btn.f-rpg       { background: rgba(251,191,36,0.15);  border-color: var(--amber);  color: var(--amber-light);  box-shadow: 0 0 8px rgba(251,191,36,0.2); }
+	.filter-btn.f-cyberpunk { background: rgba(6,182,212,0.15);   border-color: #06b6d4;      color: #67e8f9;             box-shadow: 0 0 8px rgba(6,182,212,0.3); }
+	
+	/* Nuevos estilos de diseño para las etiquetas pequeñas (Badges) */
+	.gbadge-strategy  { background: rgba(124,58,237,0.2); color: var(--purple-light); border: 1px solid rgba(124,58,237,0.3); }
+	.gbadge-rpg       { background: rgba(251,191,36,0.2);  color: var(--amber-light);  border: 1px solid rgba(251,191,36,0.3); }
+	.gbadge-cyberpunk { background: rgba(6,182,212,0.2);   color: #67e8f9;             border: 1px solid rgba(6,182,212,0.3); }
+
+    /* ── Paginación / Cargar más ── */
+    .res-counter {
+      font-family: 'Special Elite', cursive;
+      font-size: 11px;
+      color: var(--text3);
+      letter-spacing: 1px;
+      text-align: center;
+      margin-bottom: 1rem;
+    }
+    .res-counter b { color: var(--text2); }
+
+    .load-more-wrap {
+      text-align: center;
+      margin: 1.2rem 0 0.5rem;
+    }
+    .btn-load-more {
+      padding: 10px 28px;
+      border-radius: 3px;
+      font-size: 12px;
+      cursor: pointer;
+      font-family: 'Special Elite', cursive;
+      letter-spacing: 1px;
+      background: var(--bg3);
+      border: 1px solid var(--border2);
+      color: var(--text2);
+      transition: all 0.2s;
+      position: relative;
+      overflow: hidden;
+    }
+    .btn-load-more:hover { border-color: var(--purple-light); color: var(--text); background: var(--bg4); }
+    .btn-load-more:disabled { opacity: 0.3; cursor: not-allowed; }
+    .btn-load-more .lm-count {
+      display: inline-block;
+      margin-left: 6px;
+      font-size: 10px;
+      color: var(--text3);
+    }
+    .end-message {
+      text-align: center;
+      padding: 1rem 0 0.5rem;
+      font-family: 'Special Elite', cursive;
+      font-size: 11px;
+      color: var(--text3);
+      letter-spacing: 1px;
+    }
+	
+  </style>
+</head>
+<body>
+
+<div class="wrap" id="app">
+
+  <div class="header">
+    <svg class="web-svg web-tl" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M0 0 L80 0 M0 0 L0 80" stroke="#a78bfa" stroke-width="0.8"/>
+      <path d="M0 0 L60 20 M0 0 L20 60 M0 0 L40 40" stroke="#a78bfa" stroke-width="0.6"/>
+      <ellipse cx="0" cy="0" rx="25" ry="25" stroke="#a78bfa" stroke-width="0.5" fill="none"/>
+      <ellipse cx="0" cy="0" rx="45" ry="45" stroke="#a78bfa" stroke-width="0.4" fill="none"/>
+      <ellipse cx="0" cy="0" rx="65" ry="65" stroke="#a78bfa" stroke-width="0.3" fill="none"/>
+    </svg>
+    <svg class="web-svg web-tr" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M0 0 L80 0 M0 0 L0 80" stroke="#a78bfa" stroke-width="0.8"/>
+      <path d="M0 0 L60 20 M0 0 L20 60 M0 0 L40 40" stroke="#a78bfa" stroke-width="0.6"/>
+      <ellipse cx="0" cy="0" rx="25" ry="25" stroke="#a78bfa" stroke-width="0.5" fill="none"/>
+      <ellipse cx="0" cy="0" rx="45" ry="45" stroke="#a78bfa" stroke-width="0.4" fill="none"/>
+      <ellipse cx="0" cy="0" rx="65" ry="65" stroke="#a78bfa" stroke-width="0.3" fill="none"/>
+    </svg>
+
+    <div class="skull-row">
+      <span>🦇</span><span>💀</span><span>🦇</span>
+    </div>
+    <div class="site-title">¿Qué juego indie<br>te espera este verano?</div>
+    <div class="site-sub">
+      Responde las preguntas y el destino revelará tu próxima obsesión.<br>
+      ¡Ahora puedes ver qué fuerzas guían cada una de tus elecciones! 👁
+    </div>
+  </div>
+
+  <div class="bat-divider">🕸</div>
+
+  <div id="quiz-section" class="spider-wrap">
+    <div class="prog-wrap">
+      <div class="prog-bar" id="prog"></div>
+    </div>
+    <div class="qcard">
+      <div class="qlabel" id="qlabel"></div>
+      <div class="qtext" id="qtext"></div>
+      <div class="opts"  id="opts"></div>
+    </div>
+    <div class="nav">
+      <button class="nbtn" id="prevBtn" onclick="nav(-1)" type="button">← Retroceder</button>
+      <span   class="qcount" id="qcount"></span>
+      <button class="nbtn primary" id="nextBtn" onclick="nav(1)" type="button">Continuar →</button>
+    </div>
+    <div class="candle-row"><span class="candle">🕯</span><span class="candle">🕯</span><span class="candle">🕯</span></div>
+  </div>
+
+  <div class="results" id="results-section">
+    <div class="res-header">
+      <h2>☠ El oráculo ha hablado ☠</h2>
+      <p id="res-sub"></p>
+    </div>
+
+    <div class="res-filters">
+      <button class="filter-btn active" id="filter-all"    onclick="filterResults('all')"    type="button">🎲 Todos</button>
+      <button class="filter-btn"        id="filter-summer" onclick="filterResults('summer')" type="button">☀️ Verano</button>
+      <button class="filter-btn"        id="filter-horror" onclick="filterResults('horror')" type="button">👻 Terror</button>
+      <button class="filter-btn"        id="filter-cozy"   onclick="filterResults('cozy')"   type="button">🌿 Cozy</button>
+      <!-- Añadir dentro de <div class="res-filters"> -->
+		<button class="filter-btn" id="filter-strategy" onclick="filterResults('strategy')" type="button">⚙️ Estrategia</button>
+		<button class="filter-btn" id="filter-rpg"      onclick="filterResults('rpg')"      type="button">📜 Rol/Narrativo</button>
+		<button class="filter-btn" id="filter-cyberpunk" onclick="filterResults('cyberpunk')" type="button">🧬 Cyberpunk</button>
+    </div>
+
+    <div id="game-list"></div>
+
+    <div class="load-more-wrap" id="load-more-wrap" style="display:none;">
+      <button class="btn-load-more" id="load-more-btn" onclick="loadMore()" type="button">
+        ✦ Mostrar más resultados <span class="lm-count" id="lm-count"></span>
+      </button>
+    </div>
+    <div class="end-message" id="end-message" style="display:none;">✦ Has llegado al final del destino ✦</div>
+
+    <div class="actions">
+      <button class="btn-action btn-reroll"   onclick="rerollResults()" type="button">🎲 Invocar de nuevo</button>
+      <button class="btn-action btn-restart"  onclick="restart()"       type="button">💀 Empezar de cero</button>
+    </div>
+  </div>
+
+  <div class="bat-divider">🦴</div>
+  <div class="footer">✦ &nbsp; Quiz de juegos indie &nbsp; · &nbsp; Verano del horror &nbsp; ✦</div>
+</div>
+
+<script>
+// ==========================================
+// 1. BASE DE DATOS UNIFICADA DE JUEGOS (GAME_TAGS)
+// ==========================================
+const GAME_TAGS = {
+  // --- TERROR ---
+  "Tormented Souls": ["horror"], 
+  "Crow Country": ["horror"], 
+  "Faith: The Unholy Trinity": ["horror"],
+  "Amnesia: The Bunker": ["horror", "summer"], 
+  "Phasmophobia": ["horror"], 
+  "Iron Lung": ["horror"],
+  "My House.wad": ["horror"], 
+  "Dredge": ["horror", "summer", "cozy"],
+  "Omori": ["horror", "cozy"],
+  "Norco": ["horror"],
+  "Disco Elysium": ["horror", "summer"],
+  "Return of the Obra Dinn": ["horror"],
+  "Beacon Pines": ["horror", "cozy"],
+  "Signalis": ["horror"],
+  "The Long Dark": ["horror", "summer"],
+  "Spiritfarer": ["horror", "cozy", "summer"],
+  "Grave Seasons": ["horror", "cozy", "summer", "only-english"],
+  "Mina the Hollower": ["horror", "summer"],
+  "Blighted": ["horror", "summer"],
+  "Vagante": ["horror"],
+  "Lethal Company": ["horror"],
+  "Doki Doki Literature Club": ["horror", "cozy"],
+  "Inscryption": ["horror"],
+  "Darkwood": ["horror"],
+  "Little Nightmares II": ["horror"],
+  "SOMA": ["horror"],
+  "Subnautica": ["horror", "summer"],
+  "Salt and Sanctuary": ["horror"],
+  "Curse of the Dead Gods": ["horror"],
+  "GRIME": ["horror"],
+  "Blasphemous": ["horror"],
+  "Buckshot Roulette": ["horror"],
+  "Gloomwood": ["horror"],
+  "Dusk": ["horror", "summer"],
+  "Selaco": ["horror", "summer"],
+  "Pathologic 2": ["horror", "rpg"],
+  "Anemoiapolis": ["horror", "puzzle"],
+  "Slay the Princess": ["horror", "rpg"],
+
+  // --- ESTRATEGIA Y GESTIÓN ---
+  "Loop Hero": ["strategy", "horror", "summer"],
+  "Papers Please": ["strategy", "summer"],
+  "Barotrauma": ["horror", "strategy"],
+  "Songs of Syx": ["strategy", "summer", "only-english"],
+  "Manor Lords": ["strategy", "summer"],
+  "Frostpunk 2": ["strategy", "horror"],
+  "Against the Storm": ["strategy", "horror"],
+  "Cult of the Lamb": ["horror", "cozy", "strategy"],
+  "Factorio": ["strategy"],
+  "RimWorld": ["strategy", "horror"],
+
+  // --- ROL / NARRATIVO ---
+  "Citizen Sleeper": ["rpg", "cyberpunk", "cozy"],
+  "Pentiment": ["rpg", "horror"],
+  "1000xRESIST": ["horror", "rpg", "summer"],
+  "The Cosmic Wheel Sisterhood": ["rpg", "cozy"],
+  "Limbus Company": ["rpg", "horror"],
+  "Arcadian Atlas": ["rpg", "strategy", "summer"],
+  "Cassette Beasts": ["rpg", "cozy", "summer"],
+
+  // --- CYBERPUNK / SCI-FI ---
+  "Ghostrunner 2": ["cyberpunk", "summer"],
+  "Katana ZERO": ["cyberpunk", "horror"],
+  "Nine Sols": ["rpg", "cyberpunk", "horror"],
+  "Mullet MadJack": ["cyberpunk", "summer"],
+  "Pacific Drive": ["horror", "sci-fi", "summer"],
+  "Stray": ["cyberpunk", "cozy"],
+  "Cloudpunk": ["cyberpunk", "summer"],
+  "Shadows of Doubt": ["cyberpunk", "horror"],
+
+  // --- SOLO EN INGLÉS ---
+  "Who's Lila?": ["horror", "puzzle", "only-english"],
+  "Ostranauts": ["strategy", "cyberpunk", "only-english"],
+  "Caves of Qud": ["rpg", "sci-fi", "only-english"],
+  "Milk inside a bag of milk": ["horror", "only-english"],
+  "Mainframe Industries": ["cyberpunk", "puzzle", "only-english"],
+  "Hypnospace Outlaw": ["rpg", "only-english"],
+  "Akane": ["cyberpunk", "summer", "only-english"],
+  "Aquaria": ["summer", "cozy", "only-english"],
+
+  // --- COZY, RELAX Y VERANO ---
+  "Cloudheim": ["cozy", "summer", "rpg"],
+  "Pseudoregalia": ["summer", "puzzle"],
+  "A Short Hike": ["summer", "cozy"],
+  "Stardew Valley": ["summer", "cozy"],
+  "Hokko Life": ["summer", "cozy"],
+  "Unpacking": ["summer", "cozy"],
+  "Coral Island": ["summer", "cozy"],
+  "Cozy Grove": ["summer", "cozy"],
+  "Alba: A Wildlife Adventure": ["summer", "cozy"],
+  "Cloud Gardens": ["summer", "cozy"],
+  "Journey": ["summer", "cozy"],
+  "Flower": ["summer", "cozy"],
+  "Abzû": ["summer", "cozy"],
+  "Moonlight Peaks": ["summer", "cozy"],
+  "Tales of Seikyu": ["summer", "cozy"],
+  "Woodo": ["summer", "cozy"],
+  "Eastshade": ["summer", "cozy"],
+  "Dordogne": ["summer", "cozy"],
+  "Outer Wilds": ["summer"],
+  "Sable": ["summer"],
+  "Tchia": ["summer"],
+  "Sailwind": ["summer"],
+  "Tunic": ["summer"],
+  "Tails of Iron": ["summer"],
+  "Kena: Bridge of Spirits": ["summer"],
+  "Weird West": ["summer"],
+  "Phoenotopia Awakening": ["summer"],
+  "Moonlighter 2: The Endless Vault": ["summer"],
+  "Outbound": ["summer", "cozy"],
+  "Dave the Diver": ["summer", "cozy"],
+  "Firewatch": ["summer"],
+  "CrossCode": ["summer"],
+  "Sea of Stars": ["summer"],
+  "TMNT: Shredder's Revenge": ["summer"],
+  "Sonic Mania": ["summer"],
+  "Shovel Knight": ["summer"],
+  "A Hat in Time": ["summer", "cozy"],
+  "Demon Turf": ["summer"],
+  "Ratatan": ["summer"],
+  "Neon White": ["summer"],
+  "Ultrakill": ["summer"],
+  "Art of Rally": ["summer"],
+  "Raft": ["summer"],
+  "Sail Forth": ["summer"],
+  "Windbound": ["summer"],
+  "King of Seas": ["summer"],
+  "Moonglow Bay": ["summer", "cozy"],
+  "Pine": ["summer"],
+  "Chained Echoes": ["summer"],
+  "Ara Fell": ["summer"],
+  "Wytchwood": ["summer", "cozy"],
+  "TOEM": ["summer", "cozy"],
+  "Littlewood": ["summer", "cozy"],
+  "Garden Story": ["summer", "cozy"],
+  "What Remains of Edith Finch": ["summer", "cozy"],
+  "Gris": ["summer", "cozy"],
+  "West of Loathing": ["summer"],
+  "Slay the Spire": ["summer"],
+  "Balatro": ["summer"],
+  "Ori and the Will of the Wisps": ["summer", "cozy"],
+  "Townscaper": ["summer", "cozy"],
+  "A Little to the Left": ["summer", "cozy"],
+  "Summerhouse": ["summer", "cozy"],
+  "The Garden Path": ["summer", "cozy"],
+  "Hyper Light Drifter": ["summer"],
+  "Rogue Legacy 2": ["summer"],
+  "Enter the Gungeon": ["summer"],
+  "Core Keeper": ["summer", "cozy"],
+  "Dinkum": ["summer", "cozy"],
+  "Wanderburg": ["summer", "cozy"],
+  "Valheim": ["summer"],
+  "Terraria": ["summer"],
+  "It Takes Two": ["summer"],
+  "Pode": ["summer", "cozy"],
+  "Rivals of Aether": ["summer"],
+  "Deep Rock Galactic": ["summer"],
+  "OneShot": ["cozy"],
+  "Jazzpunk": ["summer"],
+  "Baba Is You": ["summer"],
+  "The Witness": ["summer"],
+  "The Talos Principle": ["summer"],
+  "Heaven's Vault": ["summer"],
+  "Braid": ["summer"],
+  "Fez": ["summer"],
+  "Patrick's Parabox": ["summer"],
+  "Carto": ["summer", "cozy"],
+  "Opus Magnum": ["summer"],
+  "Turing Complete": ["summer"],
+  "Viewfinder": ["summer"],
+  "Superliminal": ["summer"],
+  "Antichamber": ["summer"],
+  "Manifold Garden": ["summer"],
+  "Everything": ["summer", "cozy"],
+  "Donut County": ["summer", "cozy"],
+  "Plug & Play": ["cozy"],
+  "Manual Samuel": ["summer"],
+  "Accounting+": ["summer"],
+  "Cuphead": ["summer"],
+  "Moving Out 2": ["summer"],
+  "Party Animals": ["summer"],
+  "Trine 4": ["summer"],
+  "Goat Simulator 3": ["summer"],
+  "Untitled Goose Game": ["summer", "cozy"],
+  "Kind Words (lo fi chill beats to write to)": ["cozy"],
+  "Thank Goodness You're Here!": ["summer"],
+  "D-topia": ["summer", "cozy"], 
+  "Swan Song": ["cozy", "summer"],
+  "Calx": ["summer", "cozy"],
+  "Animal Well": ["horror", "puzzle", "cozy"],
+  "Strange Horticulture": ["cozy", "puzzle", "summer"],
+  "Wanderstop": ["cozy", "summer"],
+  "Smushi Come Home": ["cozy", "summer"],
+  "Bunhouse": ["cozy", "summer"],
+  "Lake": ["cozy", "summer"],
+  "Potion Permit": ["cozy", "rpg", "summer"],
+  "Judgment Apocalypse": ["strategy", "horror"],
+  "Hollow Knight": ["horror", "summer"],
+  "Dead Cells": ["horror", "summer"],
+  "Hades": ["horror", "summer"],
+  "Celeste": ["horror", "summer"],
+  "Rusty Lake: Hotel": ["horror", "puzzle"],
+  "Akane": ["cyberpunk", "summer"],
+  "Dark Scrolls": ["summer", "horror", "strategy"],  // roguelite + acción
+
+  // --- JOYAS OCULTAS DE TERROR / MISTERIO ---
+  "Mundaun": ["horror", "puzzle"],               // Terror folclórico en los Alpes suizos dibujado a lápiz.
+  "Who's Lila?": ["horror", "puzzle"],           // Misterio inverso donde controlas manualmente las expresiones faciales del protagonista.
+  "Milk inside a bag of milk": ["horror"],       // Novela visual psicológica y claustrofóbica muy cruda.
+  "Lunacid": ["horror", "rpg"],                  // RPG de mazmorras en primera persona inspirado en los juegos oscuros de PS1.
+  "Growing Up In The Caves": ["horror", "cozy"], // Supervivencia tribal prehistórica minimalista y tensa.
+
+  // --- JOYAS OCULTAS DE STRATEGY / CYBERPUNK / SCI-FI ---
+  "Ostranauts": ["strategy", "cyberpunk"],       // Simulación hiperdetallada de supervivencia y desguace de naves en un futuro distópico.
+  "Mainframe Industries": ["cyberpunk", "puzzle"],// Hackeo de terminales lógicos y redes desde una interfaz de comandos pura.
+  "Highfleet": ["strategy", "sci-fi"],           // Estrategia militar, físicas y gestión de flotas diésel-punk en un desierto enorme.
+  "Caves of Qud": ["rpg", "sci-fi"],             // Un roguelike de ciencia ficción post-apocalíptica de culto con mutaciones infinitas.
+  "Void Bastards": ["sci-fi", "summer"],         // Shooter estratégico de cómics espaciales donde asaltas naves abandonadas.
+
+  // --- JOYAS OCULTAS DE RELAX / VERANO / COZY ---
+  "Umurangi Generation": ["cyberpunk", "summer"],// Simulador de fotografía en un futuro distópico con vibras veraniegas/urbanas.
+  "Shedworksable (Sable)": ["summer", "cozy"],    // (Ya tienes Sable, una alternativa oculta es:)
+  "Northern Journey": ["summer", "rpg"],         // Una aventura de exploración nórdica extraña, surrealista y bellísima.
+  "Aquaria": ["summer", "cozy"],                 // Un metroidvania submarino clásico e independiente que muchos han olvidado.
+  "Cloud Meadow": ["cozy", "rpg"],               // Gestión de granjas de fantasía flotantes y combate por turnos.
+};
+
+// Configuración visual centralizada de etiquetas para evitar repeticiones absurdas
+const TAG_CONFIG = {
+  'horror':    { text: '☠ terror',    class: 'gbadge-horror' },
+  'summer':    { text: '☀ verano',    class: 'gbadge-summer' },
+  'cozy':      { text: '🌿 cozy',      class: 'gbadge-cozy' },
+  'strategy':  { text: '⚙️ estrategia', class: 'gbadge-strategy' },
+  'rpg':       { text: '📜 rol',       class: 'gbadge-rpg' },
+  'cyberpunk': { text: '🧬 cyberpunk', class: 'gbadge-cyberpunk' },
+  'puzzle':    { text: '🧩 puzle',     class: 'gbadge-cozy' }, 
+  'sci-fi':    { text: '🚀 sci-fi',    class: 'gbadge-cyberpunk' }
+};
+
+// Función única y global para extraer tags de un juego
+function getTag(g) { 
+  return GAME_TAGS[g] || ["summer"]; 
+}
+
+// ==========================================
+// 2. BANCO DE PREGUNTAS (Q)
+// ==========================================
+const Q = [
+  { e:"☀️", t:"¿Qué sensación buscas este verano?", o:[
+    {l:"A",t:"Relax y desconexión total",g:["A Short Hike","Stardew Valley","Hokko Life","Spiritfarer","Unpacking","Coral Island","Cozy Grove","Alba: A Wildlife Adventure","Cloud Gardens","Journey","Flower","Abzû","Moonlight Peaks","Tales of Seikyu","Woodo","Eastshade","Dordogne","Strange Horticulture","Wanderstop","Bunhouse","Lake","Potion Permit","Cloudheim"]},
+    {l:"B",t:"Misterio sutil y atmósfera absorbente",g:["Dredge","Outer Wilds","Sable","Norco","Disco Elysium","Return of the Obra Dinn","Beacon Pines","Citizen Sleeper","Hypnospace Outlaw","What Remains of Edith Finch","Gris","The Cosmic Wheel Sisterhood","Animal Well","Strange Horticulture","Pentiment","Who's Lila?", "Umurangi Generation"]},
+    {l:"C",t:"Terror puro y tensión constante",g:["Tormented Souls","Crow Country","Faith: The Unholy Trinity","Amnesia: The Bunker","Phasmophobia","Iron Lung","My House.wad","Darkwood","Signalis","The Long Dark","Lethal Company","SOMA","Subnautica","Buckshot Roulette","Gloomwood","Dusk","Selaco","Barotrauma","Pathologic 2","Mundaun", "Milk inside a bag of milk"]},
+    {l:"D",t:"Acción, adrenalina y reflejos",g:["Hollow Knight","Dead Cells","Hades","Celeste","Salt and Sanctuary","Curse of the Dead Gods","GRIME","Blasphemous","Katana ZERO","Neon White","Ultrakill","Ghostrunner 2","Mullet MadJack","Pseudoregalia","Enter the Gungeon","Rogue Legacy 2", "Void Bastards", "Highfleet", "Akane", "Dark Scrolls"]}
+  ]},
+  { e:"🏖️", t:"Tu escenario ideal para perderte sería…", o:[
+    {l:"A",t:"Playa e islas tropicales",g:["Dave the Diver","Hokko Life","Tchia","Subnautica","Raft","Dredge","Coral Island"]},
+    {l:"B",t:"Mar y navegación (de día... y de noche)",g:["Sailwind","Dredge","Sail Forth","Raft","King of Seas","Windbound","Iron Lung","Barotrauma","Aquaria","Subnautica"]},
+    {l:"C",t:"Montañas y naturaleza",g:["A Short Hike","Firewatch","The Long Dark","Celeste","Alba: A Wildlife Adventure","Stardew Valley","Ori and the Will of the Wisps","Amnesia: The Bunker","Cloudheim","Mundaun","Northern Journey"]},
+    {l:"D",t:"Ciudad o entorno urbano",g:["Cloudpunk","Disco Elysium","Norco","Beacon Pines","Citizen Sleeper","Hypnospace Outlaw","My House.wad","Phasmophobia","Shadows of Doubt","Stray", "Umurangi Generation", "Akane"]},
+    {l:"E",t:"Fantasía y mundos imaginarios",g:["Pine","Chained Echoes","Phoenotopia Awakening","CrossCode","Ara Fell","Moonlight Peaks","Grave Seasons","Tales of Seikyu","Unbound: Worlds Apart","GRIME","Blasphemous","Nine Sols","Cassette Beasts"]},
+    {l:"F",t:"Lugares oscuros y perturbadores",g:["Darkwood","SOMA","Signalis","Little Nightmares II","Omori","Salt and Sanctuary","Vagante","Inscryption","Hollow Knight","Tormented Souls","Crow Country","Faith: The Unholy Trinity","Slay the Princess", "Lunacid", "Caves of Qud"]}
+  ]},
+  { e:"🚗", t:"Si tuvieras vacaciones virtuales, elegirías…", o:[
+    {l:"A",t:"Explorar libremente",g:["Outer Wilds","Sable","Subnautica","Sailwind","Tunic","Firewatch","A Short Hike","Outbound","Unbound: Worlds Apart","Everything","Manifold Garden","Antichamber","My House.wad","Pine","Pacific Drive"]},
+    {l:"B",t:"Hacer misiones y progresar",g:["CrossCode","Tails of Iron","Kena: Bridge of Spirits","Weird West","Moonlighter 2: The Endless Vault","Tunic","Citizen Sleeper","Disco Elysium","Tormented Souls","Crow Country","Potion Permit","Pentiment"]},
+    {l:"C",t:"Construir y crear",g:["Stardew Valley","Terraria","Valheim","Coral Island","Raft","Dinkum","Wanderburg","Core Keeper","Cloudheim","Manor Lords","Factorio"]},
+    {l:"D",t:"Competir o superar desafíos",g:["Art of Rally","Neon White","Ratatan","Slay the Spire","Balatro","Dead Cells","Hades","GRIME","Mullet MadJack","Ghostrunner 2"]},
+    {l:"E",t:"Conocer personajes únicos",g:["Disco Elysium","Hades","Spiritfarer","Omori","Moonlight Peaks","Grave Seasons","Tales of Seikyu","Citizen Sleeper","Norco","The Cosmic Wheel Sisterhood","Slay the Princess"]},
+    {l:"F",t:"Sobrevivir a algo terrorífico",g:["Signalis","Darkwood","SOMA","Little Nightmares II","The Long Dark","Subnautica","Lethal Company","Vagante","Amnesia: The Bunker","Phasmophobia","Iron Lung","Pacific Drive"]}
+  ]},
+  { e:"🎮", t:"¿Cuánto esfuerzo mental quieres dedicar?", o:[
+    {l:"A",t:"Cero, solo divertirme",g:["Untitled Goose Game","Goat Simulator 3","Party Animals","Trine 4","Pseudoregalia","Ratatan","Donut County","Thank Goodness You're Here!","Jazzpunk","Mullet MadJack"]},
+    {l:"B",t:"Algo ligero y relajado",g:["A Short Hike","Tchia","Stardew Valley","Hokko Life","Spiritfarer","Unpacking","Coral Island","Dave the Diver","Woodo","Outbound","Cozy Grove","Lake","Summerhouse","Townscaper"]},
+    {l:"C",t:"Equilibrado",g:["Dave the Diver","Firewatch","CrossCode","Outer Wilds","Subnautica","Weird West","Moonlighter 2: The Endless Vault","Citizen Sleeper","Inscryption","Phasmophobia","Crow Country","Stray","Cassette Beasts","Strange Horticulture"]},
+    {l:"D",t:"Me gustan los retos",g:["Hollow Knight","Salt and Sanctuary","Curse of the Dead Gods","Vagante","GRIME","Blasphemous","Blighted","Mina the Hollower","Katana ZERO","Ghostrunner 2","Nine Sols","Loop Hero","Slay the Spire","Balatro","Chants of Sennaar","The Witness","Viewfinder","Superliminal"]}
+  ]},
+  { e:"🚤", t:"¿Qué actividad veraniega te atrae más?", o:[
+    {l:"A",t:"Navegar por el mar",g:["Sailwind","Windbound","Dredge","Sail Forth","Raft","Barotrauma"]},
+    {l:"B",t:"Pescar tranquilamente",g:["Dave the Diver","Dredge","Stardew Valley","Hokko Life","Spiritfarer","Moonglow Bay"]},
+    {l:"C",t:"Viajar y conocer lugares",g:["Sable","Firewatch","A Short Hike","Tails of Iron","Sailwind","Journey","Outbound","Pine","Dordogne","Stray"]},
+    {l:"D",t:"Acampar en la naturaleza",g:["The Long Dark","A Short Hike","Firewatch","Valheim","Subnautica","Amnesia: The Bunker","Pacific Drive"]},
+    {l:"E",t:"Explorar ruinas y misterios",g:["Outer Wilds","Subnautica","Return of the Obra Dinn","Tunic","Blighted","Unbound: Worlds Apart","SOMA","Signalis","Darkwood","Tormented Souls","Crow Country","Phasmophobia","My House.wad","Faith: The Unholy Trinity","Iron Lung","Animal Well","Chants of Sennaar"]}
+  ]},
+  { e:"📖", t:"¿Qué tipo de historia prefieres?", o:[
+    {l:"A",t:"Alegre y optimista",g:["Hokko Life","Tchia","A Short Hike","Spiritfarer","Coral Island","Pseudoregalia","A Hat in Time","Moonlight Peaks","Tales of Seikyu","Woodo","Wytchwood","TOEM","Dordogne","Littlewood","Garden Story"]},
+    {l:"B",t:"Emotiva y conmovedora",g:["Omori","Firewatch","Spiritfarer","Celeste","What Remains of Edith Finch","Gris","Beacon Pines","SOMA","Citizen Sleeper","1000xRESIST"]},
+    {l:"C",t:"Humorística y absurda",g:["Untitled Goose Game","Goat Simulator 3","Disco Elysium","West of Loathing","Thank Goodness You're Here!","Jazzpunk","Buckshot Roulette"]},
+    {l:"D",t:"Épica y grandiosa",g:["Tails of Iron","CrossCode","Chained Echoes","Weird West","Salt and Sanctuary","Blasphemous","GRIME","Hades","Nine Sols"]},
+    {l:"E",t:"Misteriosa e intrigante",g:["Outer Wilds","Dredge","Return of the Obra Dinn","Disco Elysium","Norco","Grave Seasons","Mina the Hollower","Unbound: Worlds Apart","Inscryption","Signalis","Darkwood","Hypnospace Outlaw","Doki Doki Literature Club","Tormented Souls","Crow Country","Faith: The Unholy Trinity","Iron Lung","My House.wad","Amnesia: The Bunker","Phasmophobia","Shadows of Doubt","Pentiment","Slay the Princess"]}
+  ]},
+  { e:"🎨", t:"¿Qué estilo visual te llama más?", o:[
+    {l:"A",t:"Pixel Art retro",g:["Sea of Stars","Stardew Valley","Celeste","Shovel Knight","Terraria","Dead Cells","Hollow Knight","Mina the Hollower","Unbound: Worlds Apart","Omori","Norco","Signalis","Blasphemous","Vagante","Faith: The Unholy Trinity","Loop Hero","Katana ZERO"]},
+    {l:"B",t:"Dibujos animados y colorido",g:["Untitled Goose Game","Tchia","Cuphead","Trine 4","Pseudoregalia","A Hat in Time","Little Nightmares II","Cult of the Lamb","A Short Hike","Cozy Grove"]},
+    {l:"C",t:"Oscuro y perturbador (retro 3D o expresionista)",g:["Darkwood","SOMA","Little Nightmares II","Inscryption","Omori","Signalis","Blasphemous","GRIME","Tormented Souls","Crow Country","Amnesia: The Bunker","Iron Lung","My House.wad","Buckshot Roulette","Gloomwood","Dusk","Pathologic 2"]}
+  ]},
+  { e:"⚔️", t:"¿Cómo prefieres el combate o el peligro?", o:[
+    {l:"A",t:"Sin combate (exploración y relax)",g:["A Short Hike","Stardew Valley","Hokko Life","Spiritfarer","Unpacking","Coral Island","Abzû","Journey","Eastshade","Norco","Citizen Sleeper","Hypnospace Outlaw","Iron Lung","Unpacking","Townscaper","A Little to the Left","Summerhouse","Dordogne","The Cosmic Wheel Sisterhood","Pentiment"]},
+    {l:"B",t:"Combate ligero y divertido",g:["Dave the Diver","Tchia","Hades","Sailwind","Pseudoregalia","A Hat in Time","Crow Country","Cult of the Lamb","Moonlighter 2: The Endless Vault","Stray","Cassette Beasts"]},
+    {l:"C",t:"Combate clásico o puzles de supervivencia",g:["Tails of Iron","CrossCode","Kena: Bridge of Spirits","Phoenotopia Awakening","Weird West","Hyper Light Drifter","Tormented Souls","My House.wad","Pacific Drive","Animal Well","Strange Horticulture"]},
+    {l:"D",t:"Combate / evasión desesperada y desafiante",g:["Hollow Knight","Salt and Sanctuary","Dead Cells","Celeste","Curse of the Dead Gods","Mina the Hollower","Blighted","Vagante","GRIME","Blasphemous","Signalis","Amnesia: The Bunker","Faith: The Unholy Trinity","Phasmophobia","Darkwood","SOMA","Frostpunk 2","Against the Storm"]},
+    {l:"E",t:"Combate épico y espectacular",g:["Hades","Chained Echoes","Ultrakill","Neon White","Enter the Gungeon","Rogue Legacy 2","Dead Cells","Ghostrunner 2","Katana ZERO","Mullet MadJack","Nine Sols", "Akane"]}
+  ]},
+  { e:"📜", t:"¿Qué es más importante para ti?", o:[
+    {l:"A",t:"Historia profunda y emotiva",g:["Omori","Firewatch","Spiritfarer","What Remains of Edith Finch","Disco Elysium","Gris","Beacon Pines","SOMA","Norco","Citizen Sleeper","Doki Doki Literature Club","1000xRESIST","Pentiment","Slay the Princess"]},
+    {l:"B",t:"Jugabilidad adictiva y divertida",g:["Stardew Valley","Hades","Dead Cells","Hokko Life","Ratatan","Outbound","Balatro","Slay the Spire","Inscryption","Loop Hero","Buckshot Roulette","Cult of the Lamb"]},
+    {l:"C",t:"Exploración y libertad",g:["Outer Wilds","Tunic","Subnautica","Sailwind","Sable","Unbound: Worlds Apart","Darkwood","My House.wad","Stray","Pseudoregalia"]},
+    {l:"D",t:"Construcción, estrategia y creatividad",g:["Terraria","Valheim","Coral Island","Core Keeper","Dinkum","Factorio","RimWorld","Manor Lords","Frostpunk 2","Against the Storm","Songs of Syx","Townscaper","Cloudheim"]},
+    {l:"E",t:"Supervivencia extrema y pánico / Cooperativo",g:["Sailwind","Valheim","It Takes Two","Lethal Company","Deep Rock Galactic","Tormented Souls","Crow Country","Amnesia: The Bunker","Phasmophobia","Faith: The Unholy Trinity","Iron Lung","Barotrauma"]}
+  ]},
+  { e:"🌟", t:"¿Qué prefieres en un juego?", o:[
+    {l:"A",t:"Atmósfera relajante y bonita",g:["A Short Hike","Abzû","Journey","Spiritfarer","Eastshade","Cloud Gardens","Flower","Woodo","Outbound","Townscaper","A Little to the Left","Kind Words (lo fi chill beats to write to)","Summerhouse","The Garden Path","Dordogne"]},
+    {l:"B",t:"Sorpresas constantes, romper la cuarta pared",g:["Inscryption","Omori","Doki Doki Literature Club","OneShot","Baba Is You","Superliminal","Viewfinder","Balatro","Buckshot Roulette","Slay the Princess","My House.wad"]},
+    {l:"C",t:"Vida de detective o investigador / Exorcista",g:["Disco Elysium","Return of the Obra Dinn","Norco","Hypnospace Outlaw","Doki Doki Literature Club","Inscryption","Crow Country","Phasmophobia","Faith: The Unholy Trinity","Shadows of Doubt","Strange Horticulture","Pentiment"]},
+    {l:"D",t:"Vida de aventurero/a épico",g:["Chained Echoes","Sea of Stars","CrossCode","GRIME","Blasphemous","Vagante","Hades","Tunic","Pseudoregalia","Nine Sols"]},
+    {l:"E",t:"Vida atrapado en una pesadilla claustrofóbica",g:["SOMA","Darkwood","Signalis","Lethal Company","Subnautica","Little Nightmares II","Citizen Sleeper","Tormented Souls","Amnesia: The Bunker","My House.wad","Iron Lung","Barotrauma","Frostpunk 2"]}
+  ]},
+  { e:"🤖", t:"Elige una tecnología o artefacto para tu viaje…", o:[
+    {l:"A",t:"Un implante cibernético de reflejos aumentados",g:["Ghostrunner 2","Katana ZERO","Mullet MadJack","Nine Sols","Umurangi Generation"]},
+    {l:"B",t:"Una furgoneta destartalada que parece tener vida propia",g:["Pacific Drive","The Long Dark","Amnesia: The Bunker", "Ostranauts", "Void Bastards"]},
+    {l:"C",t:"Un reproductor de casetes con monstruos dentro",g:["Cassette Beasts","Omori","Doki Doki Literature Club"]},
+    {l:"D",t:"Un cuaderno para traducir lenguas antiguas perdidas",g:["Chants of Sennaar","Return of the Obra Dinn","The Witness","Who's Lila?"]},
+    {l:"E",t:"Una fábrica automatizada que cubre todo el planeta",g:["Factorio","RimWorld","Citizen Sleeper","Songs of Syx","Mainframe Industries"]}
+  ]},
+  { e:"👑", t:"Si fueras el líder de un asentamiento veraniego…", o:[
+    {l:"A",t:"Gestionaría recursos de forma implacable para sobrevivir al frío/caos",g:["Frostpunk 2","Against the Storm","RimWorld"]},
+    {l:"B",t:"Crearía un culto adorable pero extrañamente perturbador",g:["Cult of the Lamb","Inscryption","Dredge"]},
+    {l:"C",t:"Construiría un pueblo medieval pacífico tejado a tejado o flotante",g:["Manor Lords","Townscaper","Summerhouse","Cloudheim"]},
+    {l:"D",t:"Pasaría de liderar, prefiero ser un gato callejero vagando por ahí",g:["Stray","A Short Hike","Untitled Goose Game"]}
+  ]},
+  { e:"👁️", t:"¿Cómo prefieres enfrentarte a un enigma?", o:[
+    {l:"A",t:"Analizando el entorno milímetro a milímetro en un mapa laberíntico",g:["Animal Well","Hollow Knight","Crow Country","Pseudoregalia"]},
+    {l:"B",t:"Hablando con personajes misteriosos en un bucle mental",g:["Slay the Princess","Pentiment","Disco Elysium","Who's Lila?","Milk inside a bag of milk"]},
+    {l:"C",t:"Resolviendo acertijos lógicos visuales y mecánicos",g:["Chants of Sennaar","Rusty Lake: Hotel","Viewfinder","Superliminal","The Witness"]},
+    {l:"D",t:"Optimizando líneas de producción y menús complejos",g:["Factorio","RimWorld","Manor Lords", "Ostranauts", "Highfleet"]}
+  ]},
+  { e:"💼", t:"Encuentras un maletín olvidado en una estación abandonada, ¿qué haces?", o:[
+    {l:"A",t:"Lo abro para investigar documentos y descifrar a quién pertenecía",g:["Return of the Obra Dinn","Shadows of Doubt","Pentiment","Who's Lila?"]},
+    {l:"B",t:"Utilizo las herramientas del maletín para desguazar componentes útiles",g:["Ostranauts","Void Bastards","Pacific Drive","Factorio"]},
+    {l:"C",t:"Lo dejo intacto, prefiero no meterme en problemas y disfrutar del paisaje",g:["A Short Hike","Sable","Journey","Lake"]},
+    {l:"D",t:"Es una trampa. Saco mi arma y me preparo para una emboscada",g:["Neon White","Ultrakill","Katana ZERO","Ghostrunner 2","Highfleet"]}
+  ]},
+  { e:"🎼", t:"¿Qué tipo de banda sonora debería acompañar tu travesía?", o:[
+    {l:"A",t:"Sintetizadores oscuros, cyberpunk y ritmos industriales pesados",g:["Katana ZERO","Ghostrunner 2","Mullet MadJack","Signalis","Ruiner","Akane"]},
+    {l:"B",t:"Melodías acústicas fijas, folclore misterioso o instrumentos antiguos",g:["Mundaun","Pentiment","Chants of Sennaar","Outer Wilds","Dredge"]},
+    {l:"C",t:"Silencio absoluto roto solo por el viento, pisadas y ruidos ambientales",g:["The Long Dark","Iron Lung","Amnesia: The Bunker","Darkwood","Mundaun"]},
+    {l:"D",t:"Música lo-fi, sonidos de naturaleza y melodías sumamente reconfortantes",g:["Kind Words (lo fi chill beats to write to)","Stardew Valley","Coffee Talk","Unpacking","A Short Hike"]}
+  ]},
+  { e:"🌌", t:"Si pudieras alterar una regla del universo en tu aventura…", o:[
+    {l:"A",t:"Modificaría el tiempo (bucles temporales o cámaras lentas)",g:["Outer Wilds","Katana ZERO","Slay the Princess","Who's Lila?"]},
+    {l:"B",t:"Alteraría la gravedad y la perspectiva para caminar por techos y paredes",g:["Superliminal","Viewfinder","Manifold Garden","Pseudoregalia","Jusant"]},
+    {l:"C",t:"Ninguna regla física, prefiero controlar la genética y tener mutaciones extrañas",g:["Caves of Qud","Cult of the Lamb","Biomutant"]},
+    {l:"D",t:"No quiero magia ni poderes, prefiero la fría y cruda simulación de la realidad",g:["RimWorld","Factorio","Ostranauts","Highfleet","Manor Lords"]}
+  ]},
+  { e:"⏳", t:"¿Cómo manejas la presión cuando las cosas se complican?", o:[
+    {l:"A",t:"Me da igual el pánico, reacciono por puro instinto y reflejos veloces",g:["Ultrakill","Neon White","Ghostrunner 2","Dead Cells","Hades", "Akane"]},
+    {l:"B",t:"Me detengo a pensar de forma fría, analizando menús e inventarios minuciosamente",g:["Frostpunk 2","Against the Storm","Highfleet","Ostranauts","Loop Hero"]},
+    {l:"C",t:"Me invade una ansiedad psicológica claustrofóbica difícil de controlar",g:["Milk inside a bag of milk","Amnesia: The Bunker","Iron Lung","SOMA"]},
+    {l:"D",t:"Sé que no hay peligro real, así que lo tomo como un aprendizaje relajante",g:["Unpacking","Gris","Celeste","TOEM"]}
+  ]},
+  {
+    e: "🌐", t: "¿Cómo te llevas con el idioma de Shakespeare (Inglés)?", o: [
+      { l: "A", t: "No es un problema, juego en inglés perfectamente si el juego lo requiere", g: ["Who's Lila?", "Ostranauts", "Caves of Qud", "Milk inside a bag of milk", "Mainframe Industries", "Songs of Syx", "Hypnospace Outlaw", "Grave Seasons", "Disco Elysium", "Citizen Sleeper"] },
+      { l: "B", t: "Prefiero que esté en español, pero si es de poca lectura (acción/arcade) me defiendo", g: ["Akane", "Ultrakill", "Neon White", "Katana ZERO", "Ghostrunner 2", "Dead Cells", "Hades", "Void Bastards", "Highfleet"] },
+      { l: "C", t: "Nivel básico. Quiero mi juego 100% en español (o traducido por fans) para enterarme de la historia", g: ["A Short Hike", "Stardew Valley", "Sea of Stars", "Blasphemous", "Chants of Sennaar", "Dredge", "Omori", "Signalis", "Celeste", "Hollow Knight", "Unpacking", "Gris", "Spiritfarer"] }
+  ]},
+  {
+    e: "🌲", t: "Te despiertas en medio de un bosque a medianoche, ¿qué llevas en la mano?", o: [
+      { l: "A", t: "Una linterna dinamo que parpadea y una radio con estática", g: ["Amnesia: The Bunker", "Darkwood", "Signalis", "Phasmophobia", "Pacific Drive", "Iron Lung", "Mundaun"] },
+      { l: "B", t: "Un mapa desgastado, una brújula y una cámara de fotos analógica", g: ["Outer Wilds", "Sable", "Firewatch", "A Short Hike", "Dordogne", "TOEM", "Umurangi Generation"] },
+      { l: "C", t: "Un hacha de piedra, un plano de construcción y unas semillas", g: ["Stardew Valley", "Terraria", "Valheim", "Core Keeper", "Dinkum", "Manor Lords", "RimWorld"] },
+      { l: "D", t: "Una espada rúnica incandescente o un rifle de plasma de alta tecnología", g: ["Hades", "Hollow Knight", "Dead Cells", "Blasphemous", "Nine Sols", "Ultrakill", "Ghostrunner 2", "Akane"] }
+    ]
+  },
+  {
+    e: "🧱", t: "¿Cómo prefieres que se construya el mundo a tu alrededor?", o: [
+      { l: "A", t: "Generado procedimentalmente, infinito y lleno de sorpresas mecánicas", g: ["Terraria", "Valheim", "Core Keeper", "Factorio", "RimWorld", "Caves of Qud", "Void Bastards", "Loop Hero", "Slay the Spire", "Balatro"] },
+      { l: "B", t: "Un laberinto interconectado tallado a mano donde cada rincón esconde un secreto", g: ["Hollow Knight", "Blasphemous", "Animal Well", "Tunic", "Pseudoregalia", "Crow Country", "Tormented Souls", "Signalis"] },
+      { l: "C", t: "Un escenario lineal pero con una carga narrativa y artística abrumadora", g: ["Gris", "What Remains of Edith Finch", "Milk inside a bag of milk", "SOMA", "Sanitarium", "Pentiment", "1000xRESIST"] },
+      { l: "D", t: "Un mundo abierto inmenso que invita a la contemplación y al viaje sin prisa", g: ["Sable", "A Short Hike", "Journey", "Abzû", "Eastshade", "Cloudheim", "Northern Journey"] }
+    ]
+  },
+  {
+    e: "🎰", t: "El azar llama a tu puerta... ¿cómo respondes?", o: [
+      { l: "A", t: "Calculo las probabilidades al milímetro, minimizando el riesgo con estrategia", g: ["Factorio", "RimWorld", "Manor Lords", "Frostpunk 2", "Against the Storm", "Songs of Syx", "Ostranauts", "Highfleet"] },
+      { l: "B", t: "Abrazo el caos del mazo: que la suerte decida mi próximo movimiento", g: ["Balatro", "Slay the Spire", "Inscryption", "Loop Hero", "Buckshot Roulette"] },
+      { l: "C", t: "Prefiero que no haya azar; que todo dependa de mi habilidad al mando", g: ["Hades", "Dead Cells", "Celeste", "Ultrakill", "Neon White", "Katana ZERO", "Ghostrunner 2", "Mullet MadJack"] },
+      { l: "D", t: "El único azar que quiero es pescar un pez raro o encontrar un fósil", g: ["Stardew Valley", "Dave the Diver", "Dredge", "Coral Island", "Moonglow Bay", "Cozy Grove"] }
+    ]
+  },
+  {
+    e: "🔮", t: "Si te ofrecieran un contrato con una entidad cósmica, firmarías para...", o: [
+      { l: "A", t: "Automatizar una civilización entera y ver crecer los números sin fin", g: ["Factorio", "RimWorld", "Songs of Syx", "Manor Lords"] },
+      { l: "B", t: "Resolver un crimen existencial en una ciudad decadente donde todos mienten", g: ["Disco Elysium", "Norco", "Shadows of Doubt", "Citizen Sleeper", "Pentiment", "Who's Lila?"] },
+      { l: "C", t: "Convertirme en un dios menor en un mundo de fantasía oscura y desafiante", g: ["Hollow Knight", "Blasphemous", "GRIME", "Hades", "Salt and Sanctuary", "Nine Sols"] },
+      { l: "D", t: "Tener una cabaña eterna donde preparar pociones, cuidar plantas y leer el tarot", g: ["Strange Horticulture", "The Cosmic Wheel Sisterhood", "Potion Permit", "Wytchwood", "Stardew Valley", "Moonlight Peaks", "Wanderstop"] }
+    ]
+  }
+];
+
+// Variables del estado global de la APP
+let cur = 0, ans = [], lastScores = {}, activeFilter = 'all';
+
+// Función auxiliar para extraer etiquetas colectivas asociadas a los juegos de una opción sin repetirse
+function getOptionTags(gamesList) {
+  const tagsSet = new Set();
+  gamesList.forEach(g => {
+    const tags = getTag(g);
+    tags.forEach(t => tagsSet.add(t));
+  });
+  return Array.from(tagsSet);
+}
+
+// ==========================================
+// 3. RENDERIZADO DINÁMICO DEL TEST (PREGUNTAS)
+// ==========================================
+function render() {
+  const q = Q[cur];
+  const lbl = document.getElementById('qlabel');
+  lbl.textContent = '';
+  lbl.appendChild(document.createTextNode(`${q.e}  Pregunta `));
+  const b = document.createElement('b'); b.textContent = cur + 1; lbl.appendChild(b);
+  lbl.appendChild(document.createTextNode(` de ${Q.length}`));
+  document.getElementById('qtext').textContent = q.t;
+
+  const opts = document.getElementById('opts'); opts.innerHTML = '';
+  q.o.forEach((opt, i) => {
+    const optTags = getOptionTags(opt.g);
+    const hasHorror = optTags.includes('horror');
+    const sel = ans[cur] === i;
+    
+    const btn = document.createElement('button');
+    btn.className = `opt${sel ? (hasHorror ? ' sel-horror' : ' sel') : ''}`;
+    btn.setAttribute('type', 'button');
+    
+    btn.onclick = () => {
+      ans[cur] = i;
+      render();
+    };
+    
+    const spanL = document.createElement('span'); spanL.className = 'opt-l'; spanL.textContent = opt.l;
+    const spanT = document.createElement('span'); spanT.textContent = opt.t; spanT.style.flex = '1';
+    
+    btn.appendChild(spanL); 
+    btn.appendChild(spanT);
+    
+    const tagsContainer = document.createElement('div');
+    tagsContainer.className = 'opt-tags';
+    
+    optTags.forEach(tag => {
+      if (TAG_CONFIG[tag]) {
+        const badge = document.createElement('span');
+        badge.className = `gbadge ${TAG_CONFIG[tag].class}`;
+        badge.textContent = TAG_CONFIG[tag].text;
+        tagsContainer.appendChild(badge);
+      }
+    });
+    
+    btn.appendChild(tagsContainer);
+    opts.appendChild(btn);
+  });
+
+  document.getElementById('prog').style.width = `${((cur + 1) / Q.length) * 100}%`;
+  document.getElementById('qcount').textContent = `${cur + 1} / ${Q.length}`;
+  document.getElementById('prevBtn').disabled = cur === 0;
+  
+  const nb = document.getElementById('nextBtn');
+  nb.disabled = ans[cur] == null;
+  nb.textContent = cur === Q.length - 1 ? 'Ver mi destino ☠' : 'Continuar →';
+}
+
+function nav(dir) {
+  if (dir === 1 && cur === Q.length - 1) { showResults(); return; }
+  cur = Math.max(0, Math.min(Q.length - 1, cur + dir));
+  render();
+}
+
+// ==========================================
+// 4. SISTEMA DE COINCIDENCIAS Y RESULTADOS
+// ==========================================
+function computeScores() {
+  const s = {};
+
+  // 1. Detectar si el usuario ha respondido a la pregunta del idioma y ha elegido "100% Español"
+  // Buscamos la pregunta con el emoji del globo terráqueo 🌐
+  const languageQuestionIndex = Q.findIndex(q => q.e === "🌐");
+  const blocksEnglish = languageQuestionIndex !== -1 && ans[languageQuestionIndex] === 2; // Opción C (índice 2)
+
+  Q.forEach((q, i) => {
+    if (ans[i] != null && q.o[ans[i]]) {
+      q.o[ans[i]].g.forEach(g => {
+        // Validación crítica: si el juego existe en GAME_TAGS se procesa bajo su string exacto
+        let matchedKey = Object.keys(GAME_TAGS).find(k => k.toLowerCase() === g.toLowerCase());
+        let finalKey = matchedKey ? matchedKey : g;
+
+        // 2. Si el usuario bloqueó el inglés y este juego tiene la etiqueta "only-english", lo ignoramos por completo
+        const tags = GAME_TAGS[finalKey] || [];
+        if (blocksEnglish && tags.includes("only-english")) {
+          return; // Salta este juego, no le suma puntos
+        }
+
+        s[finalKey] = (s[finalKey] || 0) + 1;
+      });
+    }
+  });
+  return s;
+}
+
+function weightedRandom(scores) {
+  const entries = Object.entries(scores);
+  if (!entries.length) return [];
+  entries.sort((a, b) => b[1] - a[1]);
+  // Aplica ruido sólo dentro de grupos de misma puntuación para mezclarlos ligeramente
+  const maxScore = entries[0][1];
+  return entries.map(([game, score]) => {
+    const noise = (Math.random() * 0.4) - 0.2;
+    return { game, scoreReal: score, sortScore: score + noise };
+  }).sort((a, b) => b.sortScore - a.sortScore);
+}
+
+// ── Estado de paginación ──
+const PAGE_SIZE = 20;
+let allRanked   = [];   // lista completa ordenada (para el filtro activo)
+let shownCount  = 0;    // cuántas tarjetas hay pintadas ahora mismo
+
+function showResults() {
+  document.getElementById('quiz-section').style.display = 'none';
+  document.getElementById('results-section').style.display = 'block';
+  lastScores = computeScores();
+
+  let totalHorror = 0, totalSummer = 0;
+  Object.entries(lastScores).forEach(([g, scr]) => {
+    const t = getTag(g);
+    if (t.includes('horror')) totalHorror += scr;
+    if (t.includes('summer')) totalSummer += scr;
+  });
+
+  const sub = document.getElementById('res-sub');
+  sub.textContent = totalHorror > totalSummer
+    ? "Tus respuestas resuenan con la frialdad del metal, el aislamiento y los susurros en la oscuridad. Las sombras han tejido esta selección para ti:"
+    : "Buscas los rayos del sol, viajes nostálgicos y mundos que te abracen en tardes infinitas. El oráculo ha despejado los cielos para mostrarte tu rumbo:";
+
+  renderGameList();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function renderGameList() {
+  // Reconstruye la lista completa según el filtro activo
+  const full = weightedRandom(lastScores);
+  allRanked  = activeFilter === 'all'
+    ? full
+    : full.filter(({ game }) => getTag(game).includes(activeFilter));
+
+  shownCount = 0;
+  const list = document.getElementById('game-list');
+  list.innerHTML = '';
+
+  if (!allRanked.length) {
+    const m = document.createElement('div');
+    m.style.cssText = 'text-align:center;padding:2rem;color:var(--text3);font-family:Special Elite,cursive;font-size:13px;letter-spacing:1px;';
+    m.textContent = activeFilter === 'all'
+      ? 'Las sombras no encuentran nada aquí... empieza de cero.'
+      : 'Las sombras no encuentran coincidencias con este filtro en tu destino actual...';
+    list.appendChild(m);
+    document.getElementById('load-more-wrap').style.display = 'none';
+    document.getElementById('end-message').style.display    = 'none';
+    return;
+  }
+
+  appendCards(PAGE_SIZE);
+}
+
+function appendCards(howMany) {
+  const list = document.getElementById('game-list');
+  const mx   = Math.max(...allRanked.map(r => r.scoreReal));
+  const romanNums = ['I','II','III','IV','V','VI','VII','VIII','IX','X',
+                     'XI','XII','XIII','XIV','XV','XVI','XVII','XVIII','XIX','XX'];
+
+  const slice = allRanked.slice(shownCount, shownCount + howMany);
+  const globalOffset = shownCount; // rank absoluto antes de añadir este bloque
+
+  slice.forEach(({ game, scoreReal }, i) => {
+    const rank    = globalOffset + i;
+    const tags    = getTag(game);
+    const isHorror = tags.includes('horror');
+    const pct     = mx > 0 ? Math.round((scoreReal / mx) * 100) : 0;
+
+    const card = document.createElement('div');
+    card.className = `gcard${isHorror ? ' horror-card' : ''}`;
+    card.style.animationDelay = `${i * 0.03}s`;
+
+    const rankDiv = document.createElement('div');
+    rankDiv.className = `grank${rank === 0 ? ' grank-1' : rank === 1 ? ' grank-2' : rank === 2 ? ' grank-3' : ''}`;
+    rankDiv.textContent = rank < romanNums.length ? romanNums[rank] : rank + 1;
+
+    const infoDiv = document.createElement('div'); infoDiv.className = 'ginfo';
+    const title   = document.createElement('div'); title.className = 'gtitle'; title.textContent = game;
+    const meta    = document.createElement('div'); meta.className  = 'gmeta';
+
+    const sc = document.createElement('span'); sc.className = 'gscore';
+    sc.textContent = `${scoreReal} ${scoreReal === 1 ? 'coincidencia' : 'coincidencias'}`;
+    meta.appendChild(sc);
+
+    tags.forEach(tag => {
+      if (TAG_CONFIG[tag]) {
+        const badge = document.createElement('span');
+        badge.className = `gbadge ${TAG_CONFIG[tag].class}`;
+        badge.textContent = TAG_CONFIG[tag].text;
+        meta.appendChild(badge);
+      }
+    });
+
+    infoDiv.appendChild(title); infoDiv.appendChild(meta);
+
+    const bw  = document.createElement('div'); bw.className = 'gbar-wrap';
+    const bar = document.createElement('div');
+    bar.className = `gbar ${isHorror ? 'gbar-horror' : 'gbar-normal'}`;
+    bar.style.width = `${pct}%`;
+    bw.appendChild(bar);
+
+    card.appendChild(rankDiv); card.appendChild(infoDiv); card.appendChild(bw);
+    list.appendChild(card);
+  });
+
+  shownCount += slice.length;
+  updatePaginationUI();
+}
+
+function updatePaginationUI() {
+  const remaining = allRanked.length - shownCount;
+  const wrap      = document.getElementById('load-more-wrap');
+  const endMsg    = document.getElementById('end-message');
+  const countSpan = document.getElementById('lm-count');
+
+  if (remaining > 0) {
+    const next = Math.min(remaining, PAGE_SIZE);
+    countSpan.textContent = `(${shownCount} de ${allRanked.length} — ${next} más)`;
+    wrap.style.display   = 'block';
+    endMsg.style.display = 'none';
+  } else {
+    wrap.style.display   = 'none';
+    endMsg.style.display = shownCount > PAGE_SIZE ? 'block' : 'none';
+  }
+}
+
+function loadMore() {
+  const btn = document.getElementById('load-more-btn');
+  btn.disabled = true;
+  const list = document.getElementById('game-list');
+  const prevCount = shownCount;
+  list.style.opacity = '0.7';
+  setTimeout(() => {
+    appendCards(PAGE_SIZE);
+    list.style.opacity = '1';
+    btn.disabled = false;
+    // Scroll suave hasta la primera tarjeta nueva
+    const cards = list.querySelectorAll('.gcard');
+    if (cards[prevCount]) cards[prevCount].scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }, 220);
+}
+
+function filterResults(f) {
+  activeFilter = f; 
+  updateFilterBtns(); 
+  renderGameList();
+}
+
+function updateFilterBtns() {
+  ['all', 'summer', 'horror', 'cozy', 'strategy', 'rpg', 'cyberpunk'].forEach(f => {
+    const btn = document.getElementById(`filter-${f}`);
+    if (!btn) return;
+    btn.className = 'filter-btn';
+    if (f === activeFilter) {
+      if (f === 'horror') btn.classList.add('f-horror');
+      else if (f === 'summer') btn.classList.add('f-summer');
+      else if (f === 'cozy') btn.classList.add('f-cozy');
+      else if (f === 'strategy') btn.classList.add('f-strategy');
+      else if (f === 'rpg') btn.classList.add('f-rpg');
+      else if (f === 'cyberpunk') btn.classList.add('f-cyberpunk');
+      else btn.classList.add('active');
+    }
+  });
+}
+
+function rerollResults() {
+  document.getElementById('game-list').style.opacity = '0.3';
+  setTimeout(() => { 
+    renderGameList(); 
+    document.getElementById('game-list').style.opacity = '1'; 
+  }, 300);
+}
+
+function restart() {
+  cur = 0; 
+  ans = new Array(Q.length).fill(null); 
+  activeFilter = 'all';
+  allRanked  = [];
+  shownCount = 0;
+  document.getElementById('load-more-wrap').style.display = 'none';
+  document.getElementById('end-message').style.display    = 'none';
+  document.getElementById('quiz-section').style.display = 'block';
+  document.getElementById('results-section').style.display = 'none';
+  render();
+}
+
+// Iniciar aplicación al cargar
+render();
+</script>
+</body>
+</html>
