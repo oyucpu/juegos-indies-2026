@@ -71,8 +71,8 @@ const GAME_TAGS = {
   "Trashy Cashy": ["gestion", "simulacion", "humor", "casual", "indie"],
   "Type Or Die": ["puzzle", "educativo", "casual", "habilidad", "indie"],
   "Color Fear": ["horror", "psicologico", "puzzle", "atmosfera", "misterio"],
-  "The Outbound Ghost": [  "rpg","aventura","narrativo",
-  "cozy","misterio","exploracion","fantasia","emocional","indie","turnos"],
+  "The Outbound Ghost": [  "rpg","aventura","narrativo","cozy","misterio","exploracion","fantasia","emocional","indie","turnos"],
+  "Valor Mortis": ["horror","cooperativo","misterio","exploracion","supervivencia","tenso","sobrenatural"],
 
   // --- ESTRATEGIA Y GESTIÓN ---
   "Loop Hero": ["strategy", "horror", "summer", "roguelite", "cartas"],
@@ -287,7 +287,6 @@ const GAME_TAGS = {
   "Oxenfree": ["horror", "narrativo", "aventura", "misterio", "pixelart"],
   "Oxenfree II: Lost Signals": ["horror", "narrativo", "aventura", "misterio", "cooperativo"],
   "A Plague Tale: Innocence": ["horror", "narrativo", "aventura", "accion", "atmosfera"],
-  "Disco Elysium: The Final Cut": ["horror", "summer", "rpg", "narrativo", "detectivesco"],
   "Hades II": ["summer", "roguelite", "accion", "narrativo", "dificil"],
   "Neon Abyss 2": ["summer", "roguelite", "accion", "pixelart", "cooperativo"],
   "Children of the Sun": ["horror", "puzzle", "accion", "narrativo", "dificil"],
@@ -356,29 +355,28 @@ function getTag(g) {
 const Q = [
   { e:"☀️", t:"¿Qué sensación buscas este verano?", o:[
     {l:"A",t:"Relax y desconexión total",g:["A Short Hike","Stardew Valley","Hokko Life","Spiritfarer","Unpacking","Coral Island","Cozy Grove","Alba: A Wildlife Adventure","Cloud Gardens","Journey","Flower","Abzû","Moonlight Peaks","Tales of Seikyu","Woodo","Eastshade","Dordogne","Strange Horticulture","Wanderstop","Bunhouse","Lake","Potion Permit","Cloudheim","Smushi Come Home","Swan Song","D-topia","Pode","Coffee Talk","Webfishing","Sticky Business","Lil Gator Game","Melatonin","Tinykin","Venba","Night in the Woods",  "House Flipper Remastered Collection","Beastro", "Interdimensional Vending Machine","Idle Chapel"]},
-    {l:"B",t:"Misterio sutil y atmósfera absorbente",g:["Dredge","Outer Wilds","Sable","Norco","Disco Elysium","Return of the Obra Dinn","Beacon Pines","Citizen Sleeper","Hypnospace Outlaw","What Remains of Edith Finch","Gris","The Cosmic Wheel Sisterhood","Animal Well","Strange Horticulture","Pentiment","Who's Lila?","Umurangi Generation","Oxenfree","Oxenfree II: Lost Signals","Night in the Woods", "Swan Song","Shift At Midnight","Maseylia: Echoes of The Past","Gastova: The Witches of Arkana"]},
-    {l:"C",t:"Terror puro y tensión constante",g:["Tormented Souls","Crow Country","Faith: The Unholy Trinity","Amnesia: The Bunker","Phasmophobia","Iron Lung","My House.wad","Darkwood","Signalis","The Long Dark","Lethal Company","SOMA","Subnautica","Buckshot Roulette","Gloomwood","Dusk","Selaco","Barotrauma","Pathologic 2","Mundaun","Milk inside a bag of milk","A Plague Tale: Innocence","Ravenswatch",  "Remorses","Cursemark","Color Fear","Don't Let It Starve","Ogre Chamber 2222",
-  "Witchspire"]},
-    {l:"D",t:"Acción, adrenalina y reflejos",g:["Hollow Knight","Dead Cells","Hades","Hades II","Celeste","Salt and Sanctuary","Curse of the Dead Gods","GRIME","Blasphemous","Katana ZERO","Neon White","Ultrakill","Ghostrunner 2","Mullet MadJack","Pseudoregalia","Enter the Gungeon","Rogue Legacy 2","Void Bastards","Highfleet","Akane","Dark Scrolls","Ruiner","TMNT: Shredder's Revenge","Sonic Mania","Rivals of Aether","Vampire Survivors","Spiritfall"]}
+    {l:"B",t:"Misterio sutil y atmósfera absorbente",g:["Dredge","Outer Wilds","Sable","Norco","Disco Elysium","Return of the Obra Dinn","Beacon Pines","Citizen Sleeper","Hypnospace Outlaw","What Remains of Edith Finch","Gris","The Cosmic Wheel Sisterhood","Animal Well","Strange Horticulture","Pentiment","Who's Lila?","Umurangi Generation","Oxenfree","Oxenfree II: Lost Signals","Night in the Woods", "Swan Song","Shift At Midnight","Maseylia: Echoes of The Past","Gastova: The Witches of Arkana","Sister Ray"]},
+    {l:"C",t:"Terror puro y tensión constante",g:["Tormented Souls","Crow Country","Faith: The Unholy Trinity","Amnesia: The Bunker","Phasmophobia","Iron Lung","My House.wad","Darkwood","Signalis","The Long Dark","Lethal Company","SOMA","Subnautica","Buckshot Roulette","Gloomwood","Dusk","Selaco","Barotrauma","Pathologic 2","Mundaun","Milk inside a bag of milk","A Plague Tale: Innocence","Ravenswatch",  "Remorses","Cursemark","Color Fear","Don't Let It Starve","Ogre Chamber 2222","Witchspire","The 7th Guest Remake"]},
+    {l:"D",t:"Acción, adrenalina y reflejos",g:["Hollow Knight","Dead Cells","Hades","Hades II","Celeste","Salt and Sanctuary","Curse of the Dead Gods","GRIME","Blasphemous","Katana ZERO","Neon White","Ultrakill","Ghostrunner 2","Mullet MadJack","Pseudoregalia","Enter the Gungeon","Rogue Legacy 2","Void Bastards","Highfleet","Akane","Dark Scrolls","Ruiner","TMNT: Shredder's Revenge","Sonic Mania","Rivals of Aether","Vampire Survivors","Spiritfall","Gombo"]}
   ]},
   { e:"🏖️", t:"Tu escenario ideal para perderte sería…", o:[
     {l:"A",t:"Playa e islas tropicales",g:["Dave the Diver","Hokko Life","Tchia","Subnautica","Raft","Dredge","Coral Island"]},
-    {l:"B",t:"Mar y navegación (de día... y de noche)",g:["Sailwind","Dredge","Sail Forth","Raft","King of Seas","Windbound","Iron Lung","Barotrauma","Aquaria","Subnautica","Smushi Come Home"]},
+    {l:"B",t:"Mar y navegación (de día... y de noche)",g:["Sailwind","Dredge","Sail Forth","Raft","King of Seas","Windbound","Iron Lung","Barotrauma","Aquaria","Subnautica","Smushi Come Home","The Outbound Ghost"]},
     {l:"C",t:"Montañas y naturaleza",g:["A Short Hike","Firewatch","The Long Dark","Celeste","Alba: A Wildlife Adventure","Stardew Valley","Ori and the Will of the Wisps","Amnesia: The Bunker","Cloudheim","Mundaun","Northern Journey"]},
     {l:"D",t:"Ciudad o entorno urbano",g:["Cloudpunk","Disco Elysium","Norco","Beacon Pines","Citizen Sleeper","Hypnospace Outlaw","My House.wad","Phasmophobia","Shadows of Doubt","Stray", "Umurangi Generation", "Akane"]},
-    {l:"E",t:"Fantasía y mundos imaginarios",g:["Pine","Chained Echoes","Phoenotopia Awakening","CrossCode","Ara Fell","Moonlight Peaks","Grave Seasons","Tales of Seikyu","Unbound: Worlds Apart","GRIME","Blasphemous","Nine Sols","Cassette Beasts","Arcadian Atlas","Heaven's Vault","Limbus Company"]},
+    {l:"E",t:"Fantasía y mundos imaginarios",g:["Pine","Chained Echoes","Phoenotopia Awakening","CrossCode","Ara Fell","Moonlight Peaks","Grave Seasons","Tales of Seikyu","Unbound: Worlds Apart","GRIME","Blasphemous","Nine Sols","Cassette Beasts","Arcadian Atlas","Heaven's Vault","Limbus Company","Alruna: End Of History","The Adventures of Elliot"]},
     {l:"F",t:"Lugares oscuros y perturbadores",g:["Darkwood","SOMA","Signalis","Little Nightmares II","Omori","Salt and Sanctuary","Vagante","Inscryption","Hollow Knight","Tormented Souls","Crow Country","Faith: The Unholy Trinity","Slay the Princess","Lunacid","Caves of Qud","Sanitarium","Growing Up In The Caves","Anemoiapolis","Judgment Apocalypse"]}
   ]},
   { e:"🚗", t:"Si tuvieras vacaciones virtuales, elegirías…", o:[
     {l:"A",t:"Explorar libremente",g:["Outer Wilds","Sable","Subnautica","Sailwind","Tunic","Firewatch","A Short Hike","Outbound","Unbound: Worlds Apart","Everything","Manifold Garden","Antichamber","My House.wad","Pine","Pacific Drive"]},
-    {l:"B",t:"Hacer misiones y progresar",g:["CrossCode","Tails of Iron","Kena: Bridge of Spirits","Weird West","Moonlighter 2: The Endless Vault","Tunic","Citizen Sleeper","Disco Elysium","Tormented Souls","Crow Country","Potion Permit","Pentiment"]},
+    {l:"B",t:"Hacer misiones y progresar",g:["CrossCode","Tails of Iron","Kena: Bridge of Spirits","Weird West","Moonlighter 2: The Endless Vault","Tunic","Citizen Sleeper","Disco Elysium","Tormented Souls","Crow Country","Potion Permit","Pentiment","The Adventures of Elliot: The Millenium Tales","The Outbound Ghost "]},
     {l:"C",t:"Construir y crear",g:["Stardew Valley","Terraria","Valheim","Coral Island","Raft","Dinkum","Wanderburg","Core Keeper","Cloudheim","Manor Lords","Factorio","Opus Magnum","Turing Complete","Cloud Meadow"]},
     {l:"D",t:"Competir o superar desafíos",g:["Art of Rally","Neon White","Ratatan","Slay the Spire","Balatro","Dead Cells","Hades","Hades II","GRIME","Mullet MadJack","Ghostrunner 2","Rivals of Aether","Sonic Mania","Cuphead","Vampire Survivors","Monster Train","Spiritfall"]},
     {l:"E",t:"Conocer personajes únicos",g:["Disco Elysium","Hades","Spiritfarer","Omori","Moonlight Peaks","Grave Seasons","Tales of Seikyu","Citizen Sleeper","Norco","The Cosmic Wheel Sisterhood","Slay the Princess"]},
     {l:"F",t:"Sobrevivir a algo terrorífico",g:["Signalis","Darkwood","SOMA","Little Nightmares II","The Long Dark","Subnautica","Lethal Company","Vagante","Amnesia: The Bunker","Phasmophobia","Iron Lung","Pacific Drive"]}
   ]},
   { e:"🎮", t:"¿Cuánto esfuerzo mental quieres dedicar?", o:[
-    {l:"A",t:"Cero, solo divertirme",g:["Untitled Goose Game","Goat Simulator 3","Party Animals","Trine 4","Pseudoregalia","Ratatan","Donut County","Thank Goodness You're Here!","Jazzpunk","Mullet MadJack","Moving Out 2","TMNT: Shredder's Revenge","Manual Samuel","Accounting+","Vampire Survivors","Tinykin","Minit","Turnip Boy Commits Tax Evasion"]},
+    {l:"A",t:"Cero, solo divertirme",g:["Untitled Goose Game","Goat Simulator 3","Party Animals","Trine 4","Pseudoregalia","Ratatan","Donut County","Thank Goodness You're Here!","Jazzpunk","Mullet MadJack","Moving Out 2","TMNT: Shredder's Revenge","Manual Samuel","Accounting+","Vampire Survivors","Tinykin","Minit","Turnip Boy Commits Tax Evasion","Gombo"]},
     {l:"B",t:"Algo ligero y relajado",g:["A Short Hike","Tchia","Stardew Valley","Hokko Life","Spiritfarer","Unpacking","Coral Island","Dave the Diver","Woodo","Outbound","Cozy Grove","Lake","Summerhouse","Townscaper"]},
     {l:"C",t:"Equilibrado",g:["Dave the Diver","Firewatch","CrossCode","Outer Wilds","Subnautica","Weird West","Moonlighter 2: The Endless Vault","Citizen Sleeper","Inscryption","Phasmophobia","Crow Country","Stray","Cassette Beasts","Strange Horticulture"]},
     {l:"D",t:"Me gustan los retos",g:["Hollow Knight","Salt and Sanctuary","Curse of the Dead Gods","Vagante","GRIME","Blasphemous","Blighted","Mina the Hollower","Katana ZERO","Ghostrunner 2","Nine Sols","Loop Hero","Slay the Spire","Balatro","Chants of Sennaar","The Witness","Viewfinder","Superliminal","Patrick's Parabox","Braid","Fez","Turing Complete","Opus Magnum","Children of the Sun","Slay the Spire 2"]}
@@ -392,19 +390,19 @@ const Q = [
   ]},
   { e:"📖", t:"¿Qué tipo de historia prefieres?", o:[
     {l:"A",t:"Alegre y optimista",g:["Hokko Life","Tchia","A Short Hike","Spiritfarer","Coral Island","Pseudoregalia","A Hat in Time","Moonlight Peaks","Tales of Seikyu","Woodo","Wytchwood","TOEM","Dordogne","Littlewood","Garden Story","Smushi Come Home","Swan Song","Carto","Moving Out 2","Coffee Talk"]},
-    {l:"B",t:"Emotiva y conmovedora",g:["Omori","Firewatch","Spiritfarer","Spiritfarer: Farewell Edition","Celeste","What Remains of Edith Finch","Gris","Beacon Pines","SOMA","Citizen Sleeper","1000xRESIST","Oxenfree","Night in the Woods","Venba","Lil Gator Game"]},
-    {l:"C",t:"Humorística y absurda",g:["Untitled Goose Game","Goat Simulator 3","Disco Elysium","West of Loathing","Thank Goodness You're Here!","Jazzpunk","Buckshot Roulette","Manual Samuel","Accounting+","Plug & Play"]},
-    {l:"D",t:"Épica y grandiosa",g:["Tails of Iron","CrossCode","Chained Echoes","Weird West","Salt and Sanctuary","Blasphemous","GRIME","Hades","Nine Sols","Arcadian Atlas","Limbus Company","Heaven's Vault"]},
-    {l:"E",t:"Misteriosa e intrigante",g:["Outer Wilds","Dredge","Return of the Obra Dinn","Disco Elysium","Norco","Grave Seasons","Mina the Hollower","Unbound: Worlds Apart","Inscryption","Signalis","Darkwood","Hypnospace Outlaw","Doki Doki Literature Club","Tormented Souls","Crow Country","Faith: The Unholy Trinity","Iron Lung","My House.wad","Amnesia: The Bunker","Phasmophobia","Shadows of Doubt","Pentiment","Slay the Princess"]}
+    {l:"B",t:"Emotiva y conmovedora, romántica",g:["Omori","Firewatch","Spiritfarer","Spiritfarer: Farewell Edition","Celeste","What Remains of Edith Finch","Gris","Beacon Pines","SOMA","Citizen Sleeper","1000xRESIST","Oxenfree","Night in the Woods","Venba","Lil Gator Game","Mytich Love: Iberian Legends","The Outbound Ghost "]},
+    {l:"C",t:"Humorística y absurda",g:["Untitled Goose Game","Goat Simulator 3","Disco Elysium","West of Loathing","Thank Goodness You're Here!","Jazzpunk","Buckshot Roulette","Manual Samuel","Accounting+","Plug & Play","Gombo"]},
+    {l:"D",t:"Épica y grandiosa",g:["Tails of Iron","CrossCode","Chained Echoes","Weird West","Salt and Sanctuary","Blasphemous","GRIME","Hades","Nine Sols","Arcadian Atlas","Limbus Company","Heaven's Vault","Alruna: End Of History","The Adventures of Elliot: The Millenium Tales"]},
+    {l:"E",t:"Misteriosa e intrigante",g:["Outer Wilds","Dredge","Return of the Obra Dinn","Disco Elysium","Norco","Grave Seasons","Mina the Hollower","Unbound: Worlds Apart","Inscryption","Signalis","Darkwood","Hypnospace Outlaw","Doki Doki Literature Club","Tormented Souls","Crow Country","Faith: The Unholy Trinity","Iron Lung","My House.wad","Amnesia: The Bunker","Phasmophobia","Shadows of Doubt","Pentiment","Slay the Princess","Sister Ray"]}
   ]},
   { e:"🎨", t:"¿Qué estilo visual te llama más?", o:[
-    {l:"A",t:"Pixel Art retro",g:["Sea of Stars","Stardew Valley","Celeste","Shovel Knight","Terraria","Dead Cells","Hollow Knight","Mina the Hollower","Unbound: Worlds Apart","Omori","Norco","Signalis","Blasphemous","Vagante","Faith: The Unholy Trinity","Loop Hero","Katana ZERO","Papers Please","Demon Turf","Arcadian Atlas","Limbus Company","Patrick's Parabox","Rivals of Aether","Xanthiom 2","Denshattack!","Witchspire","Underchoice"]},
+    {l:"A",t:"Pixel Art retro",g:["Sea of Stars","Stardew Valley","Celeste","Shovel Knight","Terraria","Dead Cells","Hollow Knight","Mina the Hollower","Unbound: Worlds Apart","Omori","Norco","Signalis","Blasphemous","Vagante","Faith: The Unholy Trinity","Loop Hero","Katana ZERO","Papers Please","Demon Turf","Arcadian Atlas","Limbus Company","Patrick's Parabox","Rivals of Aether","Xanthiom 2","Denshattack!","Witchspire","Underchoice","The 7th Guest Remake","Alruna: End Of History"]},
     {l:"B",t:"Dibujos animados y colorido",g:["Untitled Goose Game","Tchia","Cuphead","Trine 4","Pseudoregalia","A Hat in Time","Little Nightmares II","Cult of the Lamb","A Short Hike","Cozy Grove","Smushi Come Home","Moving Out 2","Demon Turf","Pode"]},
     {l:"C",t:"Oscuro y perturbador (retro 3D o expresionista)",g:["Darkwood","SOMA","Little Nightmares II","Inscryption","Omori","Signalis","Blasphemous","GRIME","Tormented Souls","Crow Country","Amnesia: The Bunker","Iron Lung","My House.wad","Buckshot Roulette","Gloomwood","Dusk","Pathologic 2"]}
   ]},
   { e:"⚔️", t:"¿Cómo prefieres el combate o el peligro?", o:[
     {l:"A",t:"Sin combate (exploración y relax)",g:["A Short Hike","Stardew Valley","Hokko Life","Spiritfarer","Unpacking","Coral Island","Abzû","Journey","Eastshade","Norco","Citizen Sleeper","Hypnospace Outlaw","Iron Lung","Townscaper","A Little to the Left","Summerhouse","Dordogne","The Cosmic Wheel Sisterhood","Pentiment","Papers Please","Coffee Talk","Carto","Heaven's Vault"]},
-    {l:"B",t:"Combate ligero y divertido",g:["Dave the Diver","Tchia","Hades","Sailwind","Pseudoregalia","A Hat in Time","Crow Country","Cult of the Lamb","Moonlighter 2: The Endless Vault","Stray","Cassette Beasts"]},
+    {l:"B",t:"Combate ligero y divertido",g:["Dave the Diver","Tchia","Hades","Sailwind","Pseudoregalia","A Hat in Time","Crow Country","Cult of the Lamb","Moonlighter 2: The Endless Vault","Stray","Cassette Beasts","Gombo"]},
     {l:"C",t:"Combate clásico o puzles de supervivencia",g:["Tails of Iron","CrossCode","Kena: Bridge of Spirits","Phoenotopia Awakening","Weird West","Hyper Light Drifter","Tormented Souls","My House.wad","Pacific Drive","Animal Well","Strange Horticulture"]},
     {l:"D",t:"Combate / evasión desesperada y desafiante",g:["Hollow Knight","Salt and Sanctuary","Dead Cells","Celeste","Curse of the Dead Gods","Mina the Hollower","Blighted","Vagante","GRIME","Blasphemous","Signalis","Amnesia: The Bunker","Faith: The Unholy Trinity","Phasmophobia","Darkwood","SOMA","Frostpunk 2","Against the Storm"]},
     {l:"E",t:"Combate épico y espectacular",g:["Hades","Chained Echoes","Ultrakill","Neon White","Enter the Gungeon","Rogue Legacy 2","Dead Cells","Ghostrunner 2","Katana ZERO","Mullet MadJack","Nine Sols","Akane","Ruiner","TMNT: Shredder's Revenge","Arcadian Atlas","Limbus Company","Rivals of Aether"]}
@@ -412,9 +410,9 @@ const Q = [
   { e:"📜", t:"¿Qué es más importante para ti?", o:[
     {l:"A",t:"Historia profunda y emotiva",g:["Omori","Firewatch","Spiritfarer","What Remains of Edith Finch","Disco Elysium","Gris","Beacon Pines","SOMA","Norco","Citizen Sleeper","Doki Doki Literature Club","1000xRESIST","Pentiment","Slay the Princess"]},
     {l:"B",t:"Jugabilidad adictiva y divertida",g:["Stardew Valley","Hades","Dead Cells","Hokko Life","Ratatan","Outbound","Balatro","Slay the Spire","Inscryption","Loop Hero","Buckshot Roulette","Monster Train","Dicey Dungeons","Neon Abyss","Cult of the Lamb"]},
-    {l:"C",t:"Exploración y libertad",g:["Outer Wilds","Tunic","Subnautica","Sailwind","Sable","Unbound: Worlds Apart","Darkwood","My House.wad","Stray","Pseudoregalia","Tinykin","Lil Gator Game"]},
+    {l:"C",t:"Exploración y libertad",g:["Outer Wilds","Tunic","Subnautica","Sailwind","Sable","Unbound: Worlds Apart","Darkwood","My House.wad","Stray","Pseudoregalia","Tinykin","Lil Gator Game","Sister Ray","The Adventures of Elliot: The Millenium Tales"]},
     {l:"D",t:"Construcción, estrategia y creatividad",g:["Terraria","Valheim","Coral Island","Core Keeper","Dinkum","Factorio","RimWorld","Manor Lords","Frostpunk 2","Against the Storm","Songs of Syx","Townscaper","Cloudheim"]},
-    {l:"E",t:"Supervivencia extrema y pánico / Cooperativo",g:["Sailwind","Valheim","It Takes Two","Lethal Company","Deep Rock Galactic","Tormented Souls","Crow Country","Amnesia: The Bunker","Phasmophobia","Faith: The Unholy Trinity","Iron Lung","Barotrauma","Bread & Fred","Moving Out 2","TMNT: Shredder's Revenge","Judgment Apocalypse","Gunfire Reborn","Neon Abyss 2"]}
+    {l:"E",t:"Supervivencia extrema y pánico / Cooperativo",g:["Sailwind","Valheim","It Takes Two","Lethal Company","Deep Rock Galactic","Tormented Souls","Crow Country","Amnesia: The Bunker","Phasmophobia","Faith: The Unholy Trinity","Iron Lung","Barotrauma","Bread & Fred","Moving Out 2","TMNT: Shredder's Revenge","Judgment Apocalypse","Gunfire Reborn","Neon Abyss 2","Valor Mortis"]}
   ]},
   { e:"🌟", t:"¿Qué prefieres en un juego?", o:[
     {l:"A",t:"Atmósfera relajante y bonita",g:["A Short Hike","Abzû","Journey","Spiritfarer","Eastshade","Cloud Gardens","Flower","Woodo","Outbound","Townscaper","A Little to the Left","Kind Words (lo fi chill beats to write to)","Summerhouse","The Garden Path","Dordogne","Swan Song","Pode","Carto","D-topia","Coffee Talk","Smushi Come Home","Calx","Toem"]},
@@ -439,19 +437,19 @@ const Q = [
   { e:"👁️", t:"¿Cómo prefieres enfrentarte a un enigma?", o:[
     {l:"A",t:"Analizando el entorno milímetro a milímetro en un mapa laberíntico",g:["Animal Well","Hollow Knight","Crow Country","Pseudoregalia"]},
     {l:"B",t:"Hablando con personajes misteriosos en un bucle mental",g:["Slay the Princess","Pentiment","Disco Elysium","Who's Lila?","Milk inside a bag of milk"]},
-    {l:"C",t:"Resolviendo acertijos lógicos visuales y mecánicos",g:["Chants of Sennaar","Rusty Lake: Hotel","Viewfinder","Superliminal","The Witness","Braid","Fez","Baba Is You","Patrick's Parabox","Anemoiapolis","Heaven's Vault","Turing Complete","The Talos Principle"]},
+    {l:"C",t:"Resolviendo acertijos lógicos visuales y mecánicos",g:["Chants of Sennaar","Rusty Lake: Hotel","Viewfinder","Superliminal","The Witness","Braid","Fez","Baba Is You","Patrick's Parabox","Anemoiapolis","Heaven's Vault","Turing Complete","The Talos Principle","The 7th Guest Remake"]},
     {l:"D",t:"Optimizando líneas de producción y menús complejos",g:["Factorio","RimWorld","Manor Lords", "Ostranauts", "Highfleet"]}
   ]},
   { e:"💼", t:"Encuentras un maletín olvidado en una estación abandonada, ¿qué haces?", o:[
-    {l:"A",t:"Lo abro para investigar documentos y descifrar a quién pertenecía",g:["Return of the Obra Dinn","Shadows of Doubt","Pentiment","Who's Lila?"]},
+    {l:"A",t:"Lo abro para investigar documentos y descifrar a quién pertenecía",g:["Return of the Obra Dinn","Shadows of Doubt","Pentiment","Who's Lila?","The 7th Guest Remake"]},
     {l:"B",t:"Utilizo las herramientas del maletín para desguazar componentes útiles",g:["Ostranauts","Void Bastards","Pacific Drive","Factorio"]},
     {l:"C",t:"Lo dejo intacto, prefiero no meterme en problemas y disfrutar del paisaje",g:["A Short Hike","Sable","Journey","Lake"]},
     {l:"D",t:"Es una trampa. Saco mi arma y me preparo para una emboscada",g:["Neon White","Ultrakill","Katana ZERO","Ghostrunner 2","Highfleet"]}
   ]},
   { e:"🎼", t:"¿Qué tipo de banda sonora debería acompañar tu travesía?", o:[
     {l:"A",t:"Sintetizadores oscuros, cyberpunk y ritmos industriales pesados",g:["Katana ZERO","Ghostrunner 2","Mullet MadJack","Signalis","Ruiner","Akane","Cloudpunk"]},
-    {l:"B",t:"Melodías acústicas fijas, folclore misterioso o instrumentos antiguos",g:["Mundaun","Pentiment","Chants of Sennaar","Outer Wilds","Dredge"]},
-    {l:"C",t:"Silencio absoluto roto solo por el viento, pisadas y ruidos ambientales",g:["The Long Dark","Iron Lung","Amnesia: The Bunker","Darkwood","Mundaun"]},
+    {l:"B",t:"Melodías acústicas fijas, folclore misterioso o instrumentos antiguos",g:["Mundaun","Pentiment","Chants of Sennaar","Outer Wilds","Dredge","Mytich Love: Iberian Legends"]},
+    {l:"C",t:"Silencio absoluto roto solo por el viento, pisadas y ruidos ambientales",g:["The Long Dark","Iron Lung","Amnesia: The Bunker","Darkwood","Mundaun","Valor Mortis"]},
     {l:"D",t:"Música lo-fi, sonidos de naturaleza y melodías sumamente reconfortantes",g:["Kind Words (lo fi chill beats to write to)","Stardew Valley","Coffee Talk","Unpacking","A Short Hike","Swan Song","Smushi Come Home","D-topia","Melatonin","Night in the Woods","Venba"]}
   ]},
   { e:"🌌", t:"Si pudieras alterar una regla del universo en tu aventura…", o:[
@@ -463,18 +461,18 @@ const Q = [
   { e:"⏳", t:"¿Cómo manejas la presión cuando las cosas se complican?", o:[
     {l:"A",t:"Me da igual el pánico, reacciono por puro instinto y reflejos veloces",g:["Ultrakill","Neon White","Ghostrunner 2","Dead Cells","Hades","Hades II","Akane","Spiritfall","Vampire Survivors"]},
     {l:"B",t:"Me detengo a pensar de forma fría, analizando menús e inventarios minuciosamente",g:["Frostpunk 2","Against the Storm","Highfleet","Ostranauts","Loop Hero"]},
-    {l:"C",t:"Me invade una ansiedad psicológica claustrofóbica difícil de controlar",g:["Milk inside a bag of milk","Amnesia: The Bunker","Iron Lung","SOMA"]},
+    {l:"C",t:"Me invade una ansiedad psicológica claustrofóbica difícil de controlar",g:["Milk inside a bag of milk","Amnesia: The Bunker","Iron Lung","SOMA","Valor Mortis"]},
     {l:"D",t:"Sé que no hay peligro real, así que lo tomo como un aprendizaje relajante",g:["Unpacking","Gris","Celeste","TOEM"]}
   ]},
   {
     e: "🌐", t: "¿Cómo te llevas con el idioma de Shakespeare (Inglés)?", o: [
-      { l: "A", t: "No es un problema, juego en inglés perfectamente si el juego lo requiere", g: ["Who's Lila?", "Ostranauts", "Caves of Qud", "Milk inside a bag of milk", "Mainframe Industries", "Songs of Syx", "Hypnospace Outlaw", "Grave Seasons", "Disco Elysium", "Citizen Sleeper"] },
+      { l: "A", t: "No es un problema, juego en inglés perfectamente si el juego lo requiere", g: ["Who's Lila?", "Ostranauts", "Caves of Qud", "Milk inside a bag of milk", "Mainframe Industries", "Songs of Syx", "Hypnospace Outlaw", "Grave Seasons", "Disco Elysium", "Citizen Sleeper","Alruna: End Of History"] },
       { l: "B", t: "Prefiero que esté en español, pero si es de poca lectura (acción/arcade) me defiendo", g: ["Akane", "Ultrakill", "Neon White", "Katana ZERO", "Ghostrunner 2", "Dead Cells", "Hades", "Void Bastards", "Highfleet"] },
       { l: "C", t: "Nivel básico. Quiero mi juego 100% en español (o traducido por fans) para enterarme de la historia", g: ["A Short Hike", "Stardew Valley", "Sea of Stars", "Blasphemous", "Chants of Sennaar", "Dredge", "Omori", "Signalis", "Celeste", "Hollow Knight", "Unpacking", "Gris", "Spiritfarer"] }
   ]},
   {
     e: "🌲", t: "Te despiertas en medio de un bosque a medianoche, ¿qué llevas en la mano?", o: [
-      { l: "A", t: "Una linterna dinamo que parpadea y una radio con estática", g: ["Amnesia: The Bunker", "Darkwood", "Signalis", "Phasmophobia", "Pacific Drive", "Iron Lung", "Mundaun"] },
+      { l: "A", t: "Una linterna dinamo que parpadea y una radio con estática", g: ["Amnesia: The Bunker", "Darkwood", "Signalis", "Phasmophobia", "Pacific Drive", "Iron Lung", "Mundaun","Valor Mortis"] },
       { l: "B", t: "Un mapa desgastado, una brújula y una cámara de fotos analógica", g: ["Outer Wilds", "Sable", "Firewatch", "A Short Hike", "Dordogne", "TOEM", "Umurangi Generation"] },
       { l: "C", t: "Un hacha de piedra, un plano de construcción y unas semillas", g: ["Stardew Valley", "Terraria", "Valheim", "Core Keeper", "Dinkum", "Manor Lords", "RimWorld"] },
       { l: "D", t: "Una espada rúnica incandescente o un rifle de plasma de alta tecnología", g: ["Hades", "Hollow Knight", "Dead Cells", "Blasphemous", "Nine Sols", "Ultrakill", "Ghostrunner 2", "Akane"] }
@@ -485,7 +483,7 @@ const Q = [
       { l: "A", t: "Generado procedimentalmente, infinito y lleno de sorpresas mecánicas", g: ["Terraria", "Valheim", "Core Keeper", "Factorio", "RimWorld", "Caves of Qud", "Void Bastards", "Loop Hero", "Slay the Spire", "Balatro"] },
       { l: "B", t: "Un laberinto interconectado tallado a mano donde cada rincón esconde un secreto", g: ["Hollow Knight", "Blasphemous", "Animal Well", "Tunic", "Pseudoregalia", "Crow Country", "Tormented Souls", "Signalis","Crushed in Time"] },
       { l: "C", t: "Un escenario lineal pero con una carga narrativa y artística abrumadora", g: ["Gris", "What Remains of Edith Finch", "Milk inside a bag of milk", "SOMA", "Sanitarium", "Pentiment", "1000xRESIST"] },
-      { l: "D", t: "Un mundo abierto inmenso que invita a la contemplación y al viaje sin prisa", g: ["Sable", "A Short Hike", "Journey", "Abzû", "Eastshade", "Cloudheim", "Northern Journey", "Shedworksable (Sable)", "Calx", "Carto"] }
+      { l: "D", t: "Un mundo abierto inmenso que invita a la contemplación y al viaje sin prisa", g: ["Sable", "A Short Hike", "Journey", "Abzû", "Eastshade", "Cloudheim", "Northern Journey", "Shedworksable (Sable)", "Calx", "Carto", "Sister Ray"] }
     ]
   },
   {
@@ -501,7 +499,7 @@ const Q = [
       { l: "A", t: "Automatizar una civilización entera y ver crecer los números sin fin", g: ["Factorio", "RimWorld", "Songs of Syx", "Manor Lords"] },
       { l: "B", t: "Resolver un crimen existencial en una ciudad decadente donde todos mienten", g: ["Disco Elysium", "Norco", "Shadows of Doubt", "Citizen Sleeper", "Pentiment", "Who's Lila?", "Dark Scrolls","Maseylia: Echoes of The Past","Shift At Midnight","Underchoice"] },
       { l: "C", t: "Convertirme en un dios menor en un mundo de fantasía oscura y desafiante", g: ["Hollow Knight", "Blasphemous", "GRIME", "Hades", "Salt and Sanctuary", "Nine Sols",  "Gothic 1 Remake","Cursemark","Witch's Apocalyptic Journey","Gastova: The Witches of Arkana"] },
-      { l: "D", t: "Tener una cabaña eterna donde preparar pociones, cuidar plantas y leer el tarot", g: ["Strange Horticulture", "The Cosmic Wheel Sisterhood", "Potion Permit", "Wytchwood", "Stardew Valley", "Moonlight Peaks", "Wanderstop", "Arcadian Atlas", "Growing Up In The Caves", "Cloud Meadow","Beastro","House Flipper Remastered Collection","Idle Chapel","Interdimensional Vending Machine"] }
+      { l: "D", t: "Tener una cabaña eterna donde preparar pociones, cuidar plantas y leer el tarot / fantasía", g: ["Strange Horticulture", "The Cosmic Wheel Sisterhood", "Potion Permit", "Wytchwood", "Stardew Valley", "Moonlight Peaks", "Wanderstop", "Arcadian Atlas", "Growing Up In The Caves", "Cloud Meadow","Beastro","House Flipper Remastered Collection","Idle Chapel","Interdimensional Vending Machine","Mytich Love: Iberian Legends","The Outbound Ghost "] }
     ]
   }
 ];
