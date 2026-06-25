@@ -675,7 +675,7 @@ function weightedRandom(scores) {
 }
 
 // ── Estado de paginación ──
-const PAGE_SIZE = 20;
+const PAGE_SIZE = 30;
 let allRanked   = [];   // lista completa ordenada (para el filtro activo)
 let shownCount  = 0;    // cuántas tarjetas hay pintadas ahora mismo
 
