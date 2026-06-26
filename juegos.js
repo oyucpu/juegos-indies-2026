@@ -312,6 +312,7 @@ const GAME_TAGS = {
 
   // --- L ---
   "Lake": ["cozy", "summer", "narrativo", "simulacion", "relajante"],
+  "Last Day of June": ["puzzle", "narrativo", "relajante", "misterio", "atmosfera"],
   "Lethal Company": ["horror", "cooperativo", "multijugador", "tenso", "humor"],
   "Lil Gator Game": ["summer", "cozy", "plataformas", "aventura", "relajante"],
   "Limbo": ["horror", "plataformas", "puzzle", "atmosfera", "artístico"],
@@ -470,7 +471,10 @@ const GAME_TAGS = {
   "The Plucky Squire": ["aventura", "puzzle", "humor", "artístico", "narrativo"],
   "The Talos Principle": ["summer", "puzzle", "narrativo", "misterio", "filosófico"],
   "The Talos Principle 2": ["summer", "puzzle", "narrativo", "misterio", "filosófico"],
+  "The Wandering Village": ["estrategia", "gestion", "survival", "cozy", "relajante"],
   "The Witness": ["summer", "puzzle", "exploracion", "misterio", "dificil"],
+  "Timelie": ["puzzle", "estrategia", "misterio", "atmosfera", "relajante"],
+  "Timeline": ["estrategia", "gestion", "simulador", "retro", "dificil","only-english"],
   "Tinykin": ["summer", "cozy", "plataformas", "exploracion", "aventura"],
   "TMNT: Shredder's Revenge": ["summer", "accion", "retro", "cooperativo", "plataformas"],
   "TOEM": ["summer", "cozy", "puzzle", "fotografía", "narrativo"],
