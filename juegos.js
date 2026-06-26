@@ -182,6 +182,8 @@ const GAME_TAGS = {
   "Bzzzt": ["plataformas", "accion", "retro", "precision", "rapido", "indie", "singleplayer"],
 
   // --- C ---
+  // --- C ---
+  "Cairn": ["simulador", "tenso", "atmosfera", "survival", "dificil", "aventura"],
   "Calx": ["summer", "cozy", "puzzle", "relajante", "artístico"],
   "Carrion": ["horror", "accion", "metroidvania", "artístico", "humor"],
   "Carto": ["summer", "cozy", "puzzle", "narrativo", "exploracion"],
