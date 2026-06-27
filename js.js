@@ -11,8 +11,6 @@ const FILTER_CLASS = {
 };
 
 // ── Índice de claves de GAME_TAGS en minúsculas, calculado una sola vez ──
-// Evita el Object.keys(...).find(...) (O(n)) que antes se ejecutaba por
-// cada juego de cada pregunta respondida dentro de computeScores().
 const GAME_KEY_INDEX = (() => {
   const idx = new Map();
   Object.keys(GAME_TAGS).forEach(k => idx.set(k.toLowerCase(), k));
@@ -42,14 +40,21 @@ const DOM = {
   lmCount: document.getElementById('lm-count'),
 };
 
-// Función auxiliar para extraer etiquetas colectivas asociadas a los juegos de una opción sin repetirse
-function getOptionTags(gamesList) {
-  const tagsSet = new Set();
-  gamesList.forEach(g => {
-    getTag(g).forEach(t => tagsSet.add(t));
-  });
-  return Array.from(tagsSet);
-}
+// ── Tags por opción precalculados una sola vez al cargar ──
+// Antes se recalculaban en cada render() para cada opción de cada pregunta.
+// Con ~20 preguntas × ~6 opciones × N juegos = miles de Set.add() por render.
+const Q_OPTION_TAGS = Q.map(q =>
+  q.o.map(opt => {
+    const tagsSet = new Set();
+    opt.g.forEach(g => {
+      getTag(resolveGameKey(g)).forEach(t => tagsSet.add(t));
+    });
+    return Array.from(tagsSet);
+  })
+);
+
+// ── Índice de la pregunta de idioma calculado una sola vez ──
+const LANGUAGE_QUESTION_INDEX = Q.findIndex(q => q.e === "🌐");
 
 // ==========================================
 // 3. RENDERIZADO DINÁMICO DEL TEST (PREGUNTAS)
@@ -71,7 +76,8 @@ function render() {
   const frag = document.createDocumentFragment();
 
   q.o.forEach((opt, i) => {
-    const optTags = getOptionTags(opt.g);
+    // Tags ya precalculados: O(1) en vez de O(n) por render
+    const optTags = Q_OPTION_TAGS[cur][i];
     const hasHorror = optTags.includes('horror');
     const sel = ans[cur] === i;
 
@@ -132,14 +138,8 @@ function nav(dir) {
 // 4. SISTEMA DE COINCIDENCIAS Y RESULTADOS
 // ==========================================
 
-// Calculado una sola vez: índice de la pregunta de idioma (antes se buscaba
-// con Q.findIndex en cada llamada a computeScores).
-const LANGUAGE_QUESTION_INDEX = Q.findIndex(q => q.e === "🌐");
-
 function computeScores() {
   const s = {};
-
-  // 1. ¿El usuario eligió "100% Español" en la pregunta de idioma? (Opción C = índice 2)
   const blocksEnglish = LANGUAGE_QUESTION_INDEX !== -1 && ans[LANGUAGE_QUESTION_INDEX] === 2;
 
   Q.forEach((q, i) => {
@@ -147,14 +147,10 @@ function computeScores() {
     if (chosen == null || !q.o[chosen]) return;
 
     q.o[chosen].g.forEach(g => {
-      // Resolución O(1) de la clave exacta gracias al índice precalculado
       const finalKey = resolveGameKey(g);
-
-      // 2. Si el usuario bloqueó el inglés y el juego es "only-english", se ignora
       const tags = GAME_TAGS[finalKey];
-      if (!tags) return; // juego sin tags conocidos, no debería contar
+      if (!tags) return;
       if (blocksEnglish && tags.includes("only-english")) return;
-
       s[finalKey] = (s[finalKey] || 0) + 1;
     });
   });
@@ -166,7 +162,6 @@ function weightedRandom(scores) {
   const entries = Object.entries(scores);
   if (!entries.length) return [];
 
-  // Aplica ruido para mezclar ligeramente los empates de puntuación
   return entries
     .map(([game, score]) => ({
       game,
@@ -178,8 +173,11 @@ function weightedRandom(scores) {
 
 // ── Estado de paginación ──
 const PAGE_SIZE = 30;
-let allRanked  = [];   // lista completa ordenada (para el filtro activo)
-let shownCount = 0;    // cuántas tarjetas hay pintadas ahora mismo
+let allRanked  = [];
+let shownCount = 0;
+// Score máximo de la lista activa, calculado una sola vez por renderGameList()
+// para no recalcularlo en cada appendCards() durante la paginación.
+let currentMaxScore = 0;
 
 function showResults() {
   DOM.quizSection.style.display = 'none';
@@ -202,11 +200,13 @@ function showResults() {
 }
 
 function renderGameList() {
-  // Reconstruye la lista completa según el filtro activo
   const full = weightedRandom(lastScores);
   allRanked = activeFilter === 'all'
     ? full
     : full.filter(({ game }) => getTag(game).includes(activeFilter));
+
+  // Calcular el máximo una sola vez aquí; appendCards() lo reutiliza sin recalcular
+  currentMaxScore = allRanked.reduce((max, r) => Math.max(max, r.scoreReal), 0);
 
   shownCount = 0;
   const list = DOM.gameList;
@@ -229,12 +229,11 @@ function renderGameList() {
 
 function appendCards(howMany) {
   const list = DOM.gameList;
-
-  // reduce en lugar de Math.max(...array) — evita desbordar la pila con listas grandes
-  const mx = allRanked.reduce((max, r) => Math.max(max, r.scoreReal), 0);
+  // Usa currentMaxScore precalculado en renderGameList() en vez de reduce() aquí
+  const mx = currentMaxScore;
 
   const slice = allRanked.slice(shownCount, shownCount + howMany);
-  const globalOffset = shownCount; // rank absoluto antes de añadir este bloque
+  const globalOffset = shownCount;
   const frag = document.createDocumentFragment();
 
   slice.forEach(({ game, scoreReal }, i) => {
@@ -323,7 +322,6 @@ function loadMore() {
     appendCards(PAGE_SIZE);
     list.style.opacity = '1';
     btn.disabled = false;
-    // Scroll suave hasta la primera tarjeta nueva
     const cards = list.querySelectorAll('.gcard');
     if (cards[prevCount]) cards[prevCount].scrollIntoView({ behavior: 'smooth', block: 'start' });
   }, 220);
@@ -360,6 +358,7 @@ function restart() {
   activeFilter = 'all';
   allRanked = [];
   shownCount = 0;
+  currentMaxScore = 0;
   DOM.loadMoreWrap.style.display = 'none';
   DOM.endMessage.style.display = 'none';
   DOM.quizSection.style.display = 'block';
