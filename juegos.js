@@ -571,6 +571,7 @@ const GAME_TAGS = {
   "Stray Gods": ["rpg", "narrativo", "rítmico", "aventura", "fantasia"],
   "Subnautica": ["horror", "summer", "survival", "exploracion", "sci-fi"],
   "Subnautica: Below Zero": ["horror", "summer", "survival", "exploracion", "sci-fi"],
+  "Subway Midnight": ["horror", "psicologico", "puzles", "atmosfera", "surrealista","only-english"],
   "Summerhouse": ["summer", "cozy", "construccion", "relajante", "pixelart"],
   "Superliminal": ["summer", "puzles", "exploracion", "humor", "atmosfera"],
   "Swan Song": ["narrativo", "aventura", "misterio", "atmosfera", "emocional"],
