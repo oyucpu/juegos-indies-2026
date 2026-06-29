@@ -526,7 +526,7 @@ const GAME_TAGS = {
   "Paralives": ["summer", "cozy", "simulacion", "construccion", "relajante"],
   "Papers Please": ["estrategia", "summer", "narrativo", "pixelart", "tenso"],
   "Party Animals": ["summer", "cooperativo", "humor", "multijugador", "accion"],
-  "Pathologic 2": ["horror", "rpg", "survival", "narrativo", "atmosfera"],
+  "Pathologic 2": ["horror", "rpg", "survival", "narrativo", "atmosfera","only-english"],
   "Patrick's Parabox": ["summer", "puzles", "dificil", "creativo", "pixelart"],
   "Pentiment": ["rpg", "horror", "narrativo", "pixelart", "historico"],
   "Pepper Grinder": ["accion", "plataformas", "retro", "pixelart", "humor"],
